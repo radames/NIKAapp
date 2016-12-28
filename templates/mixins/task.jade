@@ -1,0 +1,15 @@
+mixin tasks(tasks)
+	article(data-ks-editable=editable(user, { list: 'Task', id: task.id })).media
+		.media-left
+			a(href='/blog/task/' + task.key)
+		.media-body
+			h3.media-heading
+				a(href='/blog/post/' + task.key)= task.title
+			if post.publishedDate || task.author
+				p.text-muted.text-small
+					if task.publishedDate
+						time= task._.publishedDate.format('MMMM Do, YYYY')
+						|  
+					if task.author
+						span by #{task.author.name.full}
+			!= task.content.brief

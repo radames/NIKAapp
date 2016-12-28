@@ -1,0 +1,90 @@
+extends ../layouts/default
+block visHeader
+	script(src="//cdnjs.cloudflare.com/ajax/libs/vis/4.17.0/vis.min.js")
+	link(href="//cdnjs.cloudflare.com/ajax/libs/vis/4.17.0/vis.min.css", rel="stylesheet")
+
+block gScript
+	script(src='/js/graph.js')
+
+
+
+block content
+	.row
+		.col-md-10.col-md-offset-1
+			#visualization
+
+		if !tasks
+			.jumbotron.text-center
+				h2 Invalid post...
+				p.lead Please check the url and try again
+		else
+			if tasks.length
+				each task, i in tasks
+						.col-md-8.col-md-offset-2
+							hr
+							article
+								header
+									h1= task.title
+								div
+									p.text-muted.text-small Created 
+										if task.createdAt
+											|on 
+											time(datetime=task.createdAt)=task._.createdAt.format('Do MMMM YYYY')
+										if task.workingGroup && task.workingGroup.length
+											p
+											b Working Group 
+											each wGroup, wGroup_i in task.workingGroup
+												a(href='/blog/' + wGroup.key)= wGroup.name
+												if wGroup_i < task.workingGroup.length - 1
+													| , 
+												else
+													| 
+										if task.assignedTo && task.assignedTo.length
+											p
+											b Assigned to: 				
+											each aTo, aTo_i in task.assignedTo
+												a(href='/blog/' + aTo.key)= aTo.name.full
+												if aTo_i < task.assignedTo.length - 1
+													| , 
+												else
+													| 
+										if task.createdBy
+											p
+											b Created by: #{task.createdBy.name.full}
+								hr
+								!= task.description.html
+
+
+//- 
+//- block page-js
+//- 	script.
+//- 		jQuery(function($) {
+//- 			
+//- 			var comments = $('#comments');
+//- 			var input = $('.comment-field-input');
+//- 			var submit = comments.find('button[type=submit]');
+//- 
+//- 			
+//- 			// Scroll to comments and focus input field
+//- 			function scrollToComments(e) {
+//- 				
+//- 				e.preventDefault();
+//- 				
+//- 				$('html, body').animate({ scrollTop: comments.offset().top }, 250);
+//- 				
+//- 				input.eq(0).focus();
+//- 			}
+//- 			$('[href="#comments"]').click( scrollToComments );
+//- 			
+//- 			
+//- 			
+//- 			// Check if field has content: enable/disable submit. Disable by default
+//- 			submit.attr('disabled','disabled');
+//- 			input.keyup(function() {
+//- 				if ($.trim($(this).val())) {
+//- 					submit.removeAttr('disabled');
+//- 				} else {
+//- 					submit.attr('disabled','disabled');
+//- 				}
+//- 			});
+//- 		});
