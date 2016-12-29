@@ -4,8 +4,9 @@ block visHeader
 	link(href="//cdnjs.cloudflare.com/ajax/libs/vis/4.17.0/vis.min.css", rel="stylesheet")
 
 block gScript
+	script.
+		var items = new vis.DataSet(!{JSON.stringify(tasks.graph)});
 	script(src='/js/graph.js')
-
 
 
 block content
@@ -18,8 +19,8 @@ block content
 				h2 Invalid post...
 				p.lead Please check the url and try again
 		else
-			if tasks.length
-				each task, i in tasks
+			if tasks.data.length
+				each task, i in tasks.data
 						.col-md-8.col-md-offset-2
 							hr
 							article

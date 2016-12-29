@@ -10,7 +10,10 @@ exports = module.exports = function (req, res) {
 	// item in the header navigation.
 	locals.section = 'tasks';
 
-	locals.tasks = [];
+	locals.tasks = {
+		data: [],
+		graph: [],
+	};
 
 	// Load the posts
 	view.on('init', function (next) {
@@ -20,7 +23,8 @@ exports = module.exports = function (req, res) {
 						.populate('createdBy workingGroup assignedTo');
 
 		q.exec(function (err, results) {
-			locals.tasks = results;
+			locals.tasks.data = results;
+			results.forEach(e => locals.tasks.graph.push({id: e._id, content: e.title, start: e.startOn, end: e.endOn}));
 			next(err);
 		});
 
