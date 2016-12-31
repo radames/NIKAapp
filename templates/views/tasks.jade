@@ -36,7 +36,7 @@ block content
 											p
 											b Working Group 
 											each wGroup, wGroup_i in task.workingGroup
-												a(href='/blog/' + wGroup.key)= wGroup.name
+												a(href='/tasks/' + wGroup.key)= wGroup.name
 												if wGroup_i < task.workingGroup.length - 1
 													| , 
 												else

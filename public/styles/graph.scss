@@ -1,12 +1,29 @@
 .vis-item {
   border-color: darkred;
 
-  &.one {
+  //working group colors
+  &.arcddhitektur-ag{
     color: white;
-    background-color: red;
+    background-color: #69D2E7;
   }
-  &.two{
+  &.finanz-ag{
     color: white;
-    background-color: blue;
+    background-color: #A7DBD8;
+  }
+  &.geschaeftsfuehrung{
+    color: white;
+    background-color: #E0E4CC;
+  }
+  &.selbstverstaendnis-ag{
+    color: white;
+    background-color: #F38630;
+  }
+  &.vereinsvorstand{
+    color: white;
+    background-color: #FA6900;
+  }
+  &.oeffentlichkeits-ag{
+    color: white;
+    background-color: black;
   }
 }

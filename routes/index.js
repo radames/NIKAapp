@@ -23,8 +23,26 @@ var middleware = require('./middleware');
 var importRoutes = keystone.importer(__dirname);
 
 // Common Middleware
-keystone.pre('routes', middleware.initLocals);
+
+
+keystone.pre('routes', function (req, res, next) {
+	res.locals.navLinks = [
+		{ label: 'Home', key: 'home', href: '/' },
+		{ label: 'Tasks', key: 'tasks', href: '/tasks' }
+	];
+	res.locals.user = req.user;
+	next();
+});
+
 keystone.pre('render', middleware.flashMessages);
+
+keystone.set('404', function (req, res, next) {
+	res.status(404).render('errors/404');
+});
+keystone.set('500', function (req, res, next) {
+	res.status(500).render('errors/500');
+});
+
 
 // Import Route Controllers
 var routes = {
@@ -35,7 +53,7 @@ var routes = {
 exports = module.exports = function (app) {
 	// Views
 	app.get('/', routes.views.index);
-	app.get('/tasks', routes.views.tasksList);
+	app.get('/tasks/:workingGroup?', routes.views.tasksList);
 
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);

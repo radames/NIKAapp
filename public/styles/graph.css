@@ -1,8 +1,20 @@
 .vis-item {
   border-color: darkred; }
-  .vis-item.one {
+  .vis-item.arcddhitektur-ag {
     color: white;
-    background-color: red; }
-  .vis-item.two {
+    background-color: #69D2E7; }
+  .vis-item.finanz-ag {
     color: white;
-    background-color: blue; }
+    background-color: #A7DBD8; }
+  .vis-item.geschaeftsfuehrung {
+    color: white;
+    background-color: #E0E4CC; }
+  .vis-item.selbstverstaendnis-ag {
+    color: white;
+    background-color: #F38630; }
+  .vis-item.vereinsvorstand {
+    color: white;
+    background-color: #FA6900; }
+  .vis-item.oeffentlichkeits-ag {
+    color: white;
+    background-color: black; }
