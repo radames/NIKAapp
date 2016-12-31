@@ -7,8 +7,7 @@ var container = document.getElementById('visualization');
 var options = {
   width: '100%',
   height: 300, // px
-  orientation: {axis: 'top',
-                item: 'top'}
+  orientation: {axis: 'top', item: 'top'}
 };
 
 // Create a Timeline

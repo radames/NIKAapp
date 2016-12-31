@@ -1,0 +1,12 @@
+.vis-item {
+  border-color: darkred;
+
+  &.one {
+    color: white;
+    background-color: red;
+  }
+  &.two{
+    color: white;
+    background-color: blue;
+  }
+}

@@ -24,7 +24,7 @@ exports = module.exports = function (req, res) {
 
 		q.exec(function (err, results) {
 			locals.tasks.data = results;
-			results.forEach(e => locals.tasks.graph.push({id: e._id, content: e.title, start: e.startOn, end: e.endOn}));
+			results.forEach(e => locals.tasks.graph.push({id: e._id, content: e.title, start: e.startOn, end: e.endOn, className: 'one'}));
 			next(err);
 		});
 
