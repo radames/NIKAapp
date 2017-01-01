@@ -23,7 +23,7 @@ var options = {
   height: 450, // px
   orientation: {axis: 'top', item: 'top'},
   min: new Date(2016, 11, 1),                // lower limit of visible range
-  max: new Date(2018, 11, 1),                // upper limit of visible range
+  max: new Date(2018, 12, 1),                // upper limit of visible range
   zoomMin: 1000 * 60 * 60 * 24,             // one day in milliseconds
   zoomMax: 1000 * 60 * 60 * 24 * 31 * 12,    // about three months in milliseconds
 
@@ -31,7 +31,7 @@ var options = {
   template: function (item) {
     var groupList = item.className.trim().split(' ');
     var html = '<div class="row">';
-    var div = '<div class="col-md-2" id="{0}">{1}</div>';
+    var div = '<div id="{0}">{1}</div>';
 
     groupList.forEach((e, i) => {
 

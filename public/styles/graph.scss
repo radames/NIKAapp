@@ -1,7 +1,12 @@
-.vis-item{
+.vis-item-content{
   border-color: darkred;
   background-color: white;
   color: black;
+
+  & div[id] {
+    padding-left: 20px;
+  }
+
 }
 
 //working group colors
@@ -28,4 +33,5 @@
 #oeffentlichkeits-ag{
   color: white;
   background-color: black;
+
 }

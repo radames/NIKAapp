@@ -1,7 +1,9 @@
-.vis-item {
+.vis-item-content {
   border-color: darkred;
   background-color: white;
   color: black; }
+  .vis-item-content div[id] {
+    padding-left: 20px; }
 
 #arcddhitektur-ag {
   color: white;
