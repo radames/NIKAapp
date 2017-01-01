@@ -43,4 +43,31 @@ var options = {
 };
 
 // Create a Timeline
+
 var timeline = new vis.Timeline(container, items, options);
+
+container.addEventListener('mouseover', mouseEvent);
+container.addEventListener('mousemove', mouseEvent);
+container.addEventListener('mouseout', mouseEvent);
+
+function mouseEvent(e) {
+  var properties = timeline.getEventProperties(e);
+  if(properties.what === 'item'){
+
+    var tooltipSpan = document.getElementById(properties.item);
+    switch(e.type){
+    case 'mouseover':
+      tooltipSpan.classList.add('active');
+      break;
+    case 'mouseout':
+      tooltipSpan.classList.remove('active');
+      break;
+    case 'mousemove':
+      var x = properties.pageX;
+      var y = properties.pageY;
+      tooltipSpan.style.top = (y + 5) + 'px';
+      tooltipSpan.style.left = (x + 5) + 'px';
+      break;
+    }
+  }
+};

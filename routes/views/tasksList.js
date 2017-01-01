@@ -46,8 +46,7 @@ exports = module.exports = function (req, res) {
 			locals.tasks.data = results;
 			results.forEach(e => {
 				var  classes = '';
-				e.workingGroup.forEach(e => classes += e.key + ' '); 
-				console.log(classes);
+				e.workingGroup.forEach(e => classes += e.key + ' ');
 				locals.tasks.graph.push({id: e._id, content: e.title, start: e.startOn, end: e.endOn, className: classes});
 			});
 			next(err);

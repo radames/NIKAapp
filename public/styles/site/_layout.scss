@@ -10,7 +10,20 @@
 }
 
 .gallery-image img{
-    display: block;
-    max-width: 100%;
-    height: auto;
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+
+.hovermsg {
+	text-decoration:none;
+	position:relative;
+	display:none;
+
+	&.active{
+		 display:block;
+		 position:fixed;
+	 	 overflow:hidden;
+	 }
 }

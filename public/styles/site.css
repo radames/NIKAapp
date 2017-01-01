@@ -5834,3 +5834,12 @@ button.close {
   display: block;
   max-width: 100%;
   height: auto; }
+
+.hovermsg {
+  text-decoration: none;
+  position: relative;
+  display: none; }
+  .hovermsg.active {
+    display: block;
+    position: fixed;
+    overflow: hidden; }

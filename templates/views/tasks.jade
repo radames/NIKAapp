@@ -22,6 +22,10 @@ block content
 		else
 			if tasks.data.length
 				each task, i in tasks.data
+						div(id=task._id).hovermsg
+							h4= task.title
+							
+							
 						.col-md-8.col-md-offset-2
 							hr
 							article
