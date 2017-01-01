@@ -23,8 +23,20 @@ block content
 			if tasks.data.length
 				each task, i in tasks.data
 						div(id=task._id).hovermsg
-							h4= task.title
-							
+							.panel.panel-info
+								.panel-heading
+									!= task.title
+								.panel-body
+									div
+										!= task.description.html
+									div
+										b Working Group 
+										each wGroup, wGroup_i in task.workingGroup
+											a(href='/tasks/' + wGroup.key)= wGroup.name
+											if wGroup_i < task.workingGroup.length - 1
+												| , 
+											else
+												| 
 							
 						.col-md-8.col-md-offset-2
 							hr
