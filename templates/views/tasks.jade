@@ -14,6 +14,11 @@ block content
 	.row
 		.col-md-10.col-md-offset-1
 			#visualization
+			#legend
+				if workingGroups
+					each wGroup, wGroup_i in workingGroups
+						icon(class="glyphicon glyphicon-stop", id=wGroup.key)
+						!= wGroup.name
 
 		if !tasks
 			.jumbotron.text-center

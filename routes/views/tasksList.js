@@ -15,10 +15,23 @@ exports = module.exports = function (req, res) {
 	};
 
 	locals.workingGroup = '';
+	locals.workingGroups = [];
 	locals.tasks = {
 		data: [],
 		graph: [],
 	};
+
+
+	//select all working group names
+	view.on('init', function (next) {
+		WorkingGroup.model.find().sort('name').exec(function (err, results) {
+			if (err || !results.length) {
+				return next(err);
+			};
+			locals.workingGroups = results;
+			next();
+		});
+	});
 
 	// Load the current category filter
 	view.on('init', function (next) {

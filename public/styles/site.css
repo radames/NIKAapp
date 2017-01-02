@@ -5838,7 +5838,8 @@ button.close {
 .hovermsg {
   text-decoration: none;
   position: relative;
-  display: none; }
+  display: none;
+  z-index: 100; }
   .hovermsg.active {
     display: block;
     position: fixed;

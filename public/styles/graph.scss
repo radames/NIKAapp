@@ -1,9 +1,8 @@
 .vis-item-content{
   border-color: darkred;
-  background-color: white;
-  color: black;
-
-  & div[id] {
+  color: white;
+  background-color: #899;
+  & div.row {
     padding-left: 20px;
   }
 
@@ -11,27 +10,20 @@
 
 //working group colors
 #arcddhitektur-ag{
-  color: white;
-  background-color: #69D2E7;
+  color: #69D2E7;
 }
 #finanz-ag{
-  color: white;
-  background-color: #A7DBD8;
+  color: #A7DBD8;
 }
 #geschaeftsfuehrung{
-  color: white;
-  background-color: #E0E4CC;
+  color: #E0E4CC;
 }
 #selbstverstaendnis-ag{
-  color: white;
-  background-color: #F38630;
+  color: #F38630;
 }
 #vereinsvorstand{
-  color: white;
-  background-color: #FA6900;
+  color: #FA6900;
 }
 #oeffentlichkeits-ag{
-  color: white;
-  background-color: black;
-
+  color: gray;
 }
