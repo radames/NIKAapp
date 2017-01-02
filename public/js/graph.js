@@ -62,8 +62,8 @@ function mouseEvent(e) {
       tooltipSpan.classList.remove('active');
       break;
     case 'mousemove':
-      var x = properties.pageX;
-      var y = properties.pageY;
+      var x = e.clientX;
+      var y = e.clientY;
       tooltipSpan.style.top = (y + 5) + 'px';
       tooltipSpan.style.left = (x + 5) + 'px';
       break;

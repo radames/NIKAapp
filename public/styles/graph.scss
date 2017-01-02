@@ -5,7 +5,6 @@
   & div.row {
     padding-left: 20px;
   }
-
 }
 
 //working group colors
@@ -26,4 +25,24 @@
 }
 #oeffentlichkeits-ag{
   color: gray;
+}
+
+#legend{
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: bold;
+  vertical-align: baseline;
+  text-align: right;
+
+  div{
+    display: inline-block;;
+    white-space: nowrap;
+
+    & a{
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+  }
 }
