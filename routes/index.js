@@ -28,7 +28,8 @@ var importRoutes = keystone.importer(__dirname);
 keystone.pre('routes', function (req, res, next) {
 	res.locals.navLinks = [
 		{ label: 'Home', key: 'home', href: '/' },
-		{ label: 'Tasks', key: 'tasks', href: '/tasks' }
+		{ label: 'Tasks', key: 'tasks', href: '/tasks' },
+		{ label: 'Graph', key: 'graph', href: '/graph' }
 	];
 	res.locals.user = req.user;
 	next();
@@ -54,6 +55,7 @@ exports = module.exports = function (app) {
 	// Views
 	app.get('/', routes.views.index);
 	app.get('/tasks/:workingGroup?', routes.views.tasksList);
+	app.get('/graph/:workingGroup?', routes.views.graph);
 
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);

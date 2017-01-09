@@ -1,72 +1,29 @@
-// DOM element where the Timeline will be attached
-var container = document.getElementById('visualization');
+// create an array with nodes
+  var nodes = new vis.DataSet([
+    {id: 1, label: 'Node 1'},
+    {id: 2, label: 'Node 2'},
+    {id: 3, label: 'Node 3'},
+    {id: 4, label: 'Node 4'},
+    {id: 5, label: 'Node 5'}
+  ]);
 
-// Create a DataSet (allows two way data-binding)
+  // create an array with edges
+  var edges = new vis.DataSet([
+    {from: 1, to: 3},
+    {from: 1, to: 2},
+    {from: 2, to: 4},
+    {from: 2, to: 5}
+  ]);
 
-
-//sprintf like
-//from http://www.kisphp.com/javascript/javascript-sprintf-function
-String.prototype.format = function(){
-  // get function arguments
-  var args = arguments;
-
-  // replace variables in string
-  return this.replace(/{(\d+)}/g, function(match, index){
-
-    // return replaced variable
-    return args[index];
-  });
-};
-// Configuration for the Timeline
-var options = {
-  width: '100%',
-  height: 450, // px
-  orientation: {axis: 'top', item: 'top'},
-  min: new Date(2016, 11, 1),                // lower limit of visible range
-  max: new Date(2018, 12, 1),                // upper limit of visible range
-  zoomMin: 1000 * 60 * 60 * 24,             // one day in milliseconds
-  zoomMax: 1000 * 60 * 60 * 24 * 31 * 12,    // about three months in milliseconds
-
-
-  template: function (item) {
-    var groupList = item.className.trim().split(' ');
-    var row = '<div class="row"><div>{0}</div>{1}</div>';
-    var icon = '<i class="glyphicon glyphicon-stop" id="{0}"></i>';
-    var icons ='';
-    groupList.forEach((e, i) => {
-      icons += icon.format(e);
-    });
-    var html = row.format(item.content,icons);
-    return html;
-  }
-};
-
-// Create a Timeline
-
-var timeline = new vis.Timeline(container, items, options);
-
-container.addEventListener('mouseover', mouseEvent);
-container.addEventListener('mousemove', mouseEvent);
-container.addEventListener('mouseout', mouseEvent);
-
-function mouseEvent(e) {
-  var properties = timeline.getEventProperties(e);
-  if(properties.what === 'item'){
-
-    var tooltipSpan = document.getElementById(properties.item);
-    switch(e.type){
-    case 'mouseover':
-      tooltipSpan.classList.add('active');
-      break;
-    case 'mouseout':
-      tooltipSpan.classList.remove('active');
-      break;
-    case 'mousemove':
-      var x = e.clientX;
-      var y = e.clientY;
-      tooltipSpan.style.top = (y + 5) + 'px';
-      tooltipSpan.style.left = (x + 5) + 'px';
-      break;
-    }
-  }
-};
+  // create a network
+  var container = document.getElementById('visualization');
+  var data = {
+    nodes: nodes,
+    edges: edges
+  };
+  var options = {
+    width: '100%',
+    height: 450, // px
+    layout: { randomSeed:2 }
+  };
+  var network = new vis.Network(container, data, options);
