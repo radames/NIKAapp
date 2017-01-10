@@ -1,29 +1,27 @@
-// create an array with nodes
-  var nodes = new vis.DataSet([
-    {id: 1, label: 'Node 1'},
-    {id: 2, label: 'Node 2'},
-    {id: 3, label: 'Node 3'},
-    {id: 4, label: 'Node 4'},
-    {id: 5, label: 'Node 5'}
-  ]);
 
-  // create an array with edges
-  var edges = new vis.DataSet([
-    {from: 1, to: 3},
-    {from: 1, to: 2},
-    {from: 2, to: 4},
-    {from: 2, to: 5}
-  ]);
+// create a network
+var container = document.getElementById('visualization');
+var data = {
+  nodes: nodes,
+  edges: relations
+};
+var options = {
+  width: '100%',
+  height: '450', // px
+  layout: { randomSeed:2 },
 
-  // create a network
-  var container = document.getElementById('visualization');
-  var data = {
-    nodes: nodes,
-    edges: edges
-  };
-  var options = {
-    width: '100%',
-    height: 450, // px
-    layout: { randomSeed:2 }
-  };
-  var network = new vis.Network(container, data, options);
+  nodes: {
+    shape: 'dot',
+    size: 20,
+    font: {
+      size: 17
+    },
+    borderWidth: 2,
+    shadow:true
+  },
+  edges: {
+    width: 2,
+    shadow:true
+  }
+};
+var network = new vis.Network(container, data, options);

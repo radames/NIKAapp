@@ -1,3 +1,12 @@
+.vis-item-content{
+  border-color: darkred;
+  color: white;
+  background-color: #899;
+  & div.row {
+    padding-left: 20px;
+  }
+}
+
 //working group colors
 #arcddhitektur-ag{
   color: #69D2E7;

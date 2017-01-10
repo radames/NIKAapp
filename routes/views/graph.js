@@ -1,6 +1,7 @@
 var keystone = require('keystone');
 var Task = keystone.list('Task');
 var WorkingGroup = keystone.list('WorkingGroup');
+var async = require('async');
 
 exports = module.exports = function (req, res) {
 
@@ -14,11 +15,12 @@ exports = module.exports = function (req, res) {
 		workingGroup: req.params.workingGroup,
 	};
 
-	locals.workingGroup = '';
+	locals.workingGroupFilter = '';
 	locals.workingGroups = [];
-	locals.tasks = {
+	locals.graphData = {
 		data: [],
-		graph: [],
+		nodes: [],
+		relations:[]
 	};
 
 
@@ -29,7 +31,23 @@ exports = module.exports = function (req, res) {
 				return next(err);
 			};
 			locals.workingGroups = results;
-			next();
+
+			// create Relationship between workinggroups and tasks
+			async.each(locals.workingGroups, function (wGroup, next) {
+
+				locals.graphData.nodes.push({id: wGroup._id, label: wGroup.name});
+				keystone.list('Task').model.find().where('workingGroup').in([wGroup._id]).exec(function (err, tasks) {
+					tasks.forEach(task => {
+						locals.graphData.relations.push({from: wGroup._id, to: task._id}); //fill relations
+					});
+					next(err);
+				});
+
+			}, function (err) {
+				next(err);
+			});
+
+
 		});
 	});
 
@@ -37,7 +55,7 @@ exports = module.exports = function (req, res) {
 	view.on('init', function (next) {
 		if (req.params.workingGroup) {
 			WorkingGroup.model.findOne({ key: locals.filters.workingGroup }).exec(function (err, result) {
-				locals.workingGroup = result;
+				locals.workingGroupFilter = result;
 				next(err);
 			});
 		} else {
@@ -45,22 +63,21 @@ exports = module.exports = function (req, res) {
 		}
 	});
 
-
-	// Load the posts
+	// Load filtered tasks
 	view.on('init', function (next) {
 
 		var q = Task.model.find()
 		.sort('-createdAt')
 		.populate('createdBy workingGroup assignedTo');
-		if(locals.workingGroup){
-			q.where('workingGroup').in([locals.workingGroup]);
+		if(locals.workingGroupFilter){
+			q.where('workingGroup').in([locals.workingGroupFilter]);
 		}
 		q.exec(function (err, results) {
-			locals.tasks.data = results;
+			locals.graphData.data = results;
 			results.forEach(e => {
 				var  classes = '';
 				e.workingGroup.forEach(e => classes += e.key + ' ');
-				locals.tasks.graph.push({id: e._id, content: e.title, start: e.startOn, end: e.endOn, className: classes});
+				locals.graphData.nodes.push({id: e._id, label: e.title});
 			});
 			next(err);
 		});

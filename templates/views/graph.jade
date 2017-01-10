@@ -6,7 +6,8 @@ block visHeader
 
 block gScript
 	script.
-		var items = new vis.DataSet(!{JSON.stringify(tasks.graph)});
+		var nodes = new vis.DataSet(!{JSON.stringify(graphData.nodes)});
+		var relations = new vis.DataSet(!{JSON.stringify(graphData.relations)});
 	script(src='/js/graph.js')
 
 
@@ -14,13 +15,13 @@ block content
 	.row
 		.col-md-10.col-md-offset-1
 			#subtitle
-				h4= workingGroup.name
+				h4= workingGroupFilter.name
 			#visualization
 			#legend
 				if workingGroups
 					each wGroup, wGroup_i in workingGroups
 						div
-							a(href='/tasks/' + wGroup.key)
+							a(href='/graph/' + wGroup.key)
 								icon(class="glyphicon glyphicon-stop", id=wGroup.key)
 								= wGroup.name
 //- 

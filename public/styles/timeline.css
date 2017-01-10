@@ -1,3 +1,10 @@
+.vis-item-content {
+  border-color: darkred;
+  color: white;
+  background-color: #899; }
+  .vis-item-content div.row {
+    padding-left: 20px; }
+
 #arcddhitektur-ag {
   color: #69D2E7; }
 
