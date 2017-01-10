@@ -8,8 +8,9 @@ var data = {
 var options = {
   width: '100%',
   height: '450', // px
-  layout: { randomSeed:2 },
-
+  layout: {
+    hierarchical: {  sortMethod: 'directed' }
+  },
   nodes: {
     shape: 'dot',
     size: 20,
