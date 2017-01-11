@@ -38,3 +38,6 @@ var options = {
   }
 };
 var network = new vis.Network(container, data, options);
+container.addEventListener('dblclick', function(){
+  network.fit();
+});

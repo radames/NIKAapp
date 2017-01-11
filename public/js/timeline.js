@@ -48,6 +48,9 @@ var timeline = new vis.Timeline(container, items, options);
 container.addEventListener('mouseover', mouseEvent);
 container.addEventListener('mousemove', mouseEvent);
 container.addEventListener('mouseout', mouseEvent);
+container.addEventListener('dblclick', function(){
+  timeline.fit();
+});
 
 function mouseEvent(e) {
   var properties = timeline.getEventProperties(e);

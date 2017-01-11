@@ -4,7 +4,7 @@ block visHeader
 	link(href="//cdnjs.cloudflare.com/ajax/libs/vis/4.17.0/vis.min.css", rel="stylesheet")
 	link(href="/styles/timeline.css", rel="stylesheet")
 
-block gScript
+block js
 	script.
 		var items = new vis.DataSet(!{JSON.stringify(tasks.graph)});
 	script(src='/js/timeline.js')

@@ -4,13 +4,7 @@ block visHeader
 	link(href="//cdnjs.cloudflare.com/ajax/libs/vis/4.17.0/vis.min.css", rel="stylesheet")
 	link(href="/styles/graph.css", rel="stylesheet")
 
-block gScript
-	script.
-		var nodes = !{JSON.stringify(graphData.nodes)};
-		var relations = !{JSON.stringify(graphData.relations)};
-	script(src='/js/graph.js')
-
-
+			
 block content
 	.row
 		.col-md-10.col-md-offset-1
@@ -24,36 +18,10 @@ block content
 							a(href='/graph/' + wGroup.key)
 								icon(class="glyphicon glyphicon-stop", id=wGroup.key)
 								= wGroup.name
-//- 
-//- block page-js
-//- 	script.
-//- 		jQuery(function($) {
-//- 			
-//- 			var comments = $('#comments');
-//- 			var input = $('.comment-field-input');
-//- 			var submit = comments.find('button[type=submit]');
-//- 
-//- 			
-//- 			// Scroll to comments and focus input field
-//- 			function scrollToComments(e) {
-//- 				
-//- 				e.preventDefault();
-//- 				
-//- 				$('html, body').animate({ scrollTop: comments.offset().top }, 250);
-//- 				
-//- 				input.eq(0).focus();
-//- 			}
-//- 			$('[href="#comments"]').click( scrollToComments );
-//- 			
-//- 			
-//- 			
-//- 			// Check if field has content: enable/disable submit. Disable by default
-//- 			submit.attr('disabled','disabled');
-//- 			input.keyup(function() {
-//- 				if ($.trim($(this).val())) {
-//- 					submit.removeAttr('disabled');
-//- 				} else {
-//- 					submit.attr('disabled','disabled');
-//- 				}
-//- 			});
-//- 		});
+
+
+block js
+	script.
+		var nodes = !{JSON.stringify(graphData.nodes)};
+		var relations = !{JSON.stringify(graphData.relations)};
+	script(src='/js/graph.js')
