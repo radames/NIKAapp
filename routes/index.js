@@ -47,7 +47,8 @@ keystone.set('500', function (req, res, next) {
 
 // Import Route Controllers
 var routes = {
-	views: importRoutes('./views')
+	views: importRoutes('./views'),
+	api: importRoutes('./api')
 };
 
 // Setup Route Bindings
@@ -57,6 +58,7 @@ exports = module.exports = function (app) {
 	app.get('/tasks/:workingGroup?', routes.views.tasksList);
 	app.get('/graph/:workingGroup?', routes.views.graph);
 
+	app.get('/api/list',keystone.middleware.api, routes.api.app.list);
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
 
