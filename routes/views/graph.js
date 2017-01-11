@@ -35,10 +35,10 @@ exports = module.exports = function (req, res) {
 			// create Relationship between workinggroups and tasks
 			async.each(locals.workingGroups, function (wGroup, next) {
 
-				locals.graphData.nodes.push({id: wGroup._id, label: wGroup.name});
+				locals.graphData.nodes.push({id: wGroup._id, label: wGroup.name, key: wGroup.key });
 				keystone.list('Task').model.find().where('workingGroup').in([wGroup._id]).exec(function (err, tasks) {
 					tasks.forEach(task => {
-						locals.graphData.relations.push({from: wGroup._id, to: task._id}); //fill relations
+						locals.graphData.relations.push({from: wGroup._id, to: task._id, shape: 'image'}); //fill relations
 					});
 					next(err);
 				});

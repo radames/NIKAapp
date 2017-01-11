@@ -6,8 +6,8 @@ block visHeader
 
 block gScript
 	script.
-		var nodes = new vis.DataSet(!{JSON.stringify(graphData.nodes)});
-		var relations = new vis.DataSet(!{JSON.stringify(graphData.relations)});
+		var nodes = !{JSON.stringify(graphData.nodes)};
+		var relations = !{JSON.stringify(graphData.relations)};
 	script(src='/js/graph.js')
 
 

@@ -1,6 +1,21 @@
 
+nodes.forEach(n =>{
+  //n.color = url;
+  if(n.key){
+    var el = document.body.appendChild(document.createElement("div"));
+    el.id = n.key;
+    var style = window.getComputedStyle(el);
+    n.color = style.getPropertyValue('color');
+    n.size = 20;
+  }else{
+    n.color = "#393939"
+    n.size = 15;
+  }
+});
+
 // create a network
 var container = document.getElementById('visualization');
+
 var data = {
   nodes: nodes,
   edges: relations
@@ -8,9 +23,6 @@ var data = {
 var options = {
   width: '100%',
   height: '450', // px
-  layout: {
-    hierarchical: {  sortMethod: 'directed' }
-  },
   nodes: {
     shape: 'dot',
     size: 20,
