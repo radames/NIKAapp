@@ -49,3 +49,7 @@
     color: #FA6900; }
   #legend #oeffentlichkeits-ag {
     color: black; }
+
+#selectList {
+  display: inline-flex;
+  float: left; }
