@@ -8,8 +8,21 @@ block visHeader
 block content
 	.row
 		.col-md-10.col-md-offset-1
-			#subtitle
-				h4= workingGroupFilter.name
+			.selectList
+				if workingGroups
+					.dropdown
+							button(class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true") Working Group 
+								b.caret
+							ul.dropdown-menu
+								li: a(href='/graph/') Alle
+								each wGroup, wGroup_i in workingGroups
+									li: a(href='/graph/' + wGroup.key)
+										= wGroup.name
+			.subtitle
+				if workingGroup
+					h4= workingGroup.name
+				else
+					h4 Alle	
 			#visualization
 			#legend
 				if workingGroups
