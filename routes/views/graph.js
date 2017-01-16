@@ -2,6 +2,7 @@ var keystone = require('keystone');
 var Task = keystone.list('Task');
 var WorkingGroup = keystone.list('WorkingGroup');
 var async = require('async');
+var moment = require('moment');
 
 exports = module.exports = function (req, res) {
 
@@ -35,7 +36,7 @@ exports = module.exports = function (req, res) {
 			// create Relationship between workinggroups and tasks
 			async.each(locals.workingGroups, function (wGroup, next) {
 
-				locals.graphData.nodes.push({id: wGroup._id, label: wGroup.name, key: wGroup.key });
+				locals.graphData.nodes.push({id: wGroup._id, label: wGroup.name, key: wGroup.key , level: 0});
 				keystone.list('Task').model.find().where('workingGroup').in([wGroup._id]).exec(function (err, tasks) {
 					tasks.forEach(task => {
 						locals.graphData.relations.push({from: wGroup._id, to: task._id, shape: 'image'}); //fill relations
@@ -67,17 +68,20 @@ exports = module.exports = function (req, res) {
 	view.on('init', function (next) {
 
 		var q = Task.model.find()
-		.sort('-createdAt')
+		.sort('endOn')
 		.populate('createdBy workingGroup assignedTo');
 		if(locals.workingGroupFilter){
 			q.where('workingGroup').in([locals.workingGroupFilter]);
 		}
 		q.exec(function (err, results) {
 			locals.graphData.data = results;
+			var firstDate;
 			results.forEach(e => {
 				var  classes = '';
+				if(firstDate === undefined) firstDate = moment(e.endOn);
+				var level = moment(e.endOn).diff(firstDate, 'days');
 				e.workingGroup.forEach(e => classes += e.key + ' ');
-				locals.graphData.nodes.push({id: e._id, label: e.title});
+				locals.graphData.nodes.push({id: e._id, label: e.title, level: 1+level/10});
 			});
 			next(err);
 		});
