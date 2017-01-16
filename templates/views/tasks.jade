@@ -13,19 +13,22 @@ block js
 block content
 	.row
 		.col-md-10.col-md-offset-1
-			#subtitle
-				h4= workingGroup.name
-			#visualization
-			#selectList
+			.selectList
 				if workingGroups
 					.dropdown
-							button(class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true") Working Group Filter 
+							button(class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true") Working Group 
 								b.caret
 							ul.dropdown-menu
 								li: a(href='/timeline/') Alle
 								each wGroup, wGroup_i in workingGroups
 									li: a(href='/timeline/' + wGroup.key)
 										= wGroup.name
+			.subtitle
+				if workingGroup
+					h4= workingGroup.name
+				else
+					h4 Alle	
+			#visualization
 			#legend
 				if workingGroups
 					each wGroup, wGroup_i in workingGroups
