@@ -1,6 +1,6 @@
 exports.create = {
 	WorkingGroup: [
-		{ 'name': 'Arcddhitektur-AG'},
+		{ 'name': 'Architektur-AG'},
 		{ 'name': 'Finanz-AG'},
 		{ 'name': 'Geschäftsführung'},
 		{ 'name': 'Selbstverständnis-AG'},

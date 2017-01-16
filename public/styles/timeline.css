@@ -5,7 +5,7 @@
   .vis-item-content div[class='row'] {
     padding-left: 12px;
     padding-right: 12px; }
-  .vis-item-content #arcddhitektur-ag {
+  .vis-item-content #architektur-ag {
     color: white;
     background-color: #69D2E7; }
   .vis-item-content #finanz-ag {
@@ -37,7 +37,7 @@
       color: black;
       text-decoration: none;
       cursor: pointer; }
-  #legend #arcddhitektur-ag {
+  #legend #architektur-ag {
     color: #69D2E7; }
   #legend #finanz-ag {
     color: #A7DBD8; }
