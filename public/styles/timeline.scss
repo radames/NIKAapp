@@ -1,30 +1,41 @@
-.vis-item-content{
+.vis-item-content {
   border-color: darkred;
-  color: white;
-  background-color: #899;
-  & div.row {
-    padding-left: 20px;
+  background-color: white;
+  color: black;
+  div[class='row']{
+    padding-left: 12px;
+    padding-right: 12px;
   }
-}
+  #arcddhitektur-ag {
+    color: white;
+    background-color: #69D2E7;
+  }
 
-//working group colors
-#arcddhitektur-ag{
-  color: #69D2E7;
-}
-#finanz-ag{
-  color: #A7DBD8;
-}
-#geschaeftsfuehrung{
-  color: #E0E4CC;
-}
-#selbstverstaendnis-ag{
-  color: #F38630;
-}
-#vereinsvorstand{
-  color: #FA6900;
-}
-#oeffentlichkeits-ag{
-  color: gray;
+  #finanz-ag {
+    color: white;
+    background-color: #A7DBD8;
+  }
+
+  #geschaeftsfuehrung {
+    color: white;
+    background-color: #E0E4CC;
+  }
+
+  #selbstverstaendnis-ag {
+    color: white;
+    background-color: #F38630;
+  }
+
+  #vereinsvorstand {
+    color: white;
+    background-color: #FA6900;
+  }
+
+  #oeffentlichkeits-ag {
+    color: white;
+    background-color: black;
+  }
+
 }
 
 #legend{
@@ -44,5 +55,28 @@
         cursor: pointer;
       }
 
+  }
+  #arcddhitektur-ag {
+    color: #69D2E7;
+  }
+
+  #finanz-ag {
+    color: #A7DBD8;
+  }
+
+  #geschaeftsfuehrung {
+    color: #E0E4CC;
+  }
+
+  #selbstverstaendnis-ag {
+    color: #F38630;
+  }
+
+  #vereinsvorstand {
+    color: #FA6900;
+  }
+
+  #oeffentlichkeits-ag {
+    color: black;
   }
 }

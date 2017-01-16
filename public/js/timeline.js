@@ -30,13 +30,13 @@ var options = {
 
   template: function (item) {
     var groupList = item.className.trim().split(' ');
-    var row = '<div class="row"><div>{0}</div>{1}</div>';
-    var icon = '<i class="glyphicon glyphicon-stop" id="{0}"></i>';
-    var icons ='';
+    var row = '<div class="row"><div><a href="/admin/tasks/{0}">{1}</a></div>{2}</div>';
+    var div = '<div id="{0}">{1}</div>';
+    var divs ='';
     groupList.forEach((e, i) => {
-      icons += icon.format(e);
+      divs += div.format(e,'&nbsp;');
     });
-    var html = row.format(item.content,icons);
+    var html = row.format(item.id, item.content, divs);
     return html;
   }
 };
