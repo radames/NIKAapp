@@ -12,6 +12,7 @@ keystone.init({
 	'name': 'dasHaus',
 	'brand': 'dasHaus',
 
+	'admin path': 'admin',
 	'sass': 'public',
 	'static': 'public',
 	'favicon': 'public/favicon.ico',
@@ -42,7 +43,7 @@ keystone.set('routes', require('./routes'));
 
 // Configure the navigation bar in Keystone's Admin UI
 keystone.set('nav', {
-	users: 'users',
+	tasks: 'tasks',
 });
 
 // Start Keystone to connect to your database and initialise the web server

@@ -28,7 +28,7 @@ var importRoutes = keystone.importer(__dirname);
 keystone.pre('routes', function (req, res, next) {
 	res.locals.navLinks = [
 		{ label: 'Home', key: 'home', href: '/' },
-		{ label: 'Tasks', key: 'tasks', href: '/tasks' },
+		{ label: 'Timeline', key: 'tasks', href: '/timeline' },
 		{ label: 'Graph', key: 'graph', href: '/graph' }
 	];
 	res.locals.user = req.user;
@@ -55,7 +55,7 @@ var routes = {
 exports = module.exports = function (app) {
 	// Views
 	app.get('/', routes.views.index);
-	app.get('/tasks/:workingGroup?', routes.views.tasksList);
+	app.get('/timeline/:workingGroup?', routes.views.tasksList);
 	app.get('/graph/:workingGroup?', routes.views.graph);
 
 	app.get('/api/list',keystone.middleware.api, routes.api.app.list);

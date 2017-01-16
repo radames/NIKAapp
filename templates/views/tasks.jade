@@ -20,7 +20,7 @@ block content
 				if workingGroups
 					each wGroup, wGroup_i in workingGroups
 						div
-							a(href='/tasks/' + wGroup.key)
+							a(href='/timeline/' + wGroup.key)
 								icon(class="glyphicon glyphicon-stop", id=wGroup.key)
 								= wGroup.name
 		if !tasks
@@ -40,7 +40,7 @@ block content
 									div
 										b Working Group 
 										each wGroup, wGroup_i in task.workingGroup
-											a(href='/tasks/' + wGroup.key)= wGroup.name
+											a(href='/timeline/' + wGroup.key)= wGroup.name
 											if wGroup_i < task.workingGroup.length - 1
 												| , 
 											else
@@ -50,7 +50,9 @@ block content
 							hr
 							article
 								header
-									h1= task.title
+										h1= task.title
+										a(href='/admin/tasks/' + task._id)
+											icon(class="glyphicon glyphicon-edit")
 								div
 									p.text-muted.text-small Created 
 										if task.createdAt
@@ -60,7 +62,7 @@ block content
 											p
 											b Working Group 
 											each wGroup, wGroup_i in task.workingGroup
-												a(href='/tasks/' + wGroup.key)= wGroup.name
+												a(href='/timeline/' + wGroup.key)= wGroup.name
 												if wGroup_i < task.workingGroup.length - 1
 													| , 
 												else
