@@ -23,6 +23,8 @@ var data = {
 var options = {
   width: '100%',
   height: '450', // px
+  layout: { hierarchical: { sortMethod: 'directed', direction: 'LR' }
+  },
   nodes: {
     shape: 'dot',
     size: 20,
