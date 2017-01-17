@@ -81,7 +81,7 @@ exports = module.exports = function (req, res) {
 				if(firstDate === undefined) firstDate = moment(e.endOn);
 				var level = moment(e.endOn).diff(firstDate, 'days');
 				e.workingGroup.forEach(e => classes += e.key + ' ');
-				locals.graphData.nodes.push({id: e._id, label: e.title, level: 1+level/10});
+				locals.graphData.nodes.push({id: e._id, label: e.title, level: (e.regularEvent?1:-1) + level/10});
 			});
 			next(err);
 		});

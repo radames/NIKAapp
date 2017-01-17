@@ -18,7 +18,8 @@ Task.add({
   assignedTo: { type: Types.Relationship, ref: 'User', index: true, many: true, label:'Assigned To'},
   workingGroup: { type: Types.Relationship, ref: 'WorkingGroup', index: true, many: true, label:'Working Group',},
   startOn: { type: Types.Date, format: 'DD-MM-YYYY', default: Date.now, label: 'Task starts on'},
-  endOn: { type: Types.Date, format: 'DD-MM-YYYY', default: Date.now, label: 'Task ends on' }
+  endOn: { type: Types.Date, format: 'DD-MM-YYYY', default: Date.now, label: 'Task ends on' },
+  regularEvent: { type: Types.Boolean, label: 'Regular Event' }
 
 });
 Task.defaultColumns = 'title, workingGroup, startOn, endOn, createdBy';
