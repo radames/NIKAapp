@@ -24,8 +24,8 @@ block content
 									li: a(href='/timeline/' + wGroup.key)
 										= wGroup.name
 			.subtitle
-				if workingGroup
-					h4= workingGroup.name
+				if workingGroupFilter
+					h4= workingGroupFilter.name
 				else
 					h4 Alle	
 			#visualization

@@ -14,7 +14,7 @@ exports = module.exports = function (req, res) {
 		workingGroup: req.params.workingGroup,
 	};
 
-	locals.workingGroup = '';
+	locals.workingGroupFilter = '';
 	locals.workingGroups = [];
 	locals.tasks = {
 		data: [],
@@ -37,7 +37,7 @@ exports = module.exports = function (req, res) {
 	view.on('init', function (next) {
 		if (req.params.workingGroup) {
 			WorkingGroup.model.findOne({ key: locals.filters.workingGroup }).exec(function (err, result) {
-				locals.workingGroup = result;
+				locals.workingGroupFilter = result;
 				next(err);
 			});
 		} else {
@@ -52,8 +52,8 @@ exports = module.exports = function (req, res) {
 		var q = Task.model.find()
 		.sort('startOn')
 		.populate('createdBy workingGroup assignedTo');
-		if(locals.workingGroup){
-			q.where('workingGroup').in([locals.workingGroup]);
+		if(locals.workingGroupFilter){
+			q.where('workingGroup').in([locals.workingGroupFilter]);
 		}
 		q.exec(function (err, results) {
 			locals.tasks.data = results;
