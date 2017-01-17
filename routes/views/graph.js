@@ -72,7 +72,7 @@ exports = module.exports = function (req, res) {
 	view.on('init', function (next) {
 
 		var q = Task.model.find()
-		.sort('endOn')
+		.sort('startOn')
 		.populate('createdBy workingGroup assignedTo');
 		if(locals.workingGroupFilter){
 			q.where('workingGroup').in([locals.workingGroupFilter]);
@@ -83,10 +83,11 @@ exports = module.exports = function (req, res) {
 			var firstDate;
 			results.forEach(e => {
 				var  classes = '';
-				if(firstDate === undefined) firstDate = moment(e.endOn);
-				var level = moment(e.endOn).diff(firstDate, 'days');
+				if(firstDate === undefined) firstDate = moment(e.startOn);
+				var level = moment(e.startOn).diff(firstDate, 'days');
+				console.log(level);
 				e.workingGroup.forEach(e => classes += e.key + ' ');
-				locals.graphData.nodes.push({id: e._id, label: e.title, level: (e.regularEvent?1:-1) + level/10});
+				locals.graphData.nodes.push({id: e._id, label: e.title, level: (e.regularEvent?-1:1+10*level/365)});
 			});
 			next(err);
 		});

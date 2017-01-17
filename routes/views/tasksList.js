@@ -50,7 +50,7 @@ exports = module.exports = function (req, res) {
 	view.on('init', function (next) {
 
 		var q = Task.model.find()
-		.sort('-createdAt')
+		.sort('startOn')
 		.populate('createdBy workingGroup assignedTo');
 		if(locals.workingGroup){
 			q.where('workingGroup').in([locals.workingGroup]);

@@ -62,10 +62,14 @@ block content
 										a(href='/admin/tasks/' + task._id)
 											icon(class="glyphicon glyphicon-edit")
 								div
-									p.text-muted.text-small Created 
-										if task.createdAt
-											|on 
-											time(datetime=task.createdAt)=task._.createdAt.format('Do MMMM YYYY')
+									p.text-muted.text-small
+										if task.startOn
+											|Start on 
+											time(datetime=task.startOn)=task._.startOn.format('Do MMMM YYYY')
+										|  - 
+										if task.endOn
+											|End on 
+											time(datetime=task.endOn)=task._.endOn.format('Do MMMM YYYY')
 										if task.workingGroup && task.workingGroup.length
 											p
 											b Working Group 
