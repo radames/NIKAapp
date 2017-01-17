@@ -14,9 +14,9 @@ block content
 							button(class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true") Working Group 
 								b.caret
 							ul.dropdown-menu
-								li: a(href='/graph/') Alle
+								li: a(href='/task-map/') Alle
 								each wGroup, wGroup_i in workingGroups
-									li: a(href='/graph/' + wGroup.key)
+									li: a(href='/task-map/' + wGroup.key)
 										= wGroup.name
 			.subtitle
 				if workingGroup
@@ -28,7 +28,7 @@ block content
 				if workingGroups
 					each wGroup, wGroup_i in workingGroups
 						div
-							a(href='/graph/' + wGroup.key)
+							a(href='/task-map/' + wGroup.key)
 								icon(class="glyphicon glyphicon-stop", id=wGroup.key)
 								= wGroup.name
 
