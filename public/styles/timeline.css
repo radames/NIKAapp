@@ -22,7 +22,7 @@
     background-color: #FA6900; }
   .vis-item-content #oeffentlichkeits-ag {
     color: white;
-    background-color: black; }
+    background-color: gray; }
 
 #legend {
   padding: .2em .6em .3em;
@@ -48,7 +48,7 @@
   #legend #vereinsvorstand {
     color: #FA6900; }
   #legend #oeffentlichkeits-ag {
-    color: black; }
+    color: gray; }
 
 .selectList {
   float: left;

@@ -24,6 +24,10 @@ exports = module.exports = function (req, res) {
 		relations:[]
 	};
 
+	locals.tasks = {
+		data: []
+	};
+
 
 	//select all working group names
 	view.on('init', function (next) {
@@ -75,6 +79,7 @@ exports = module.exports = function (req, res) {
 		}
 		q.exec(function (err, results) {
 			locals.graphData.data = results;
+			locals.tasks.data = results;
 			var firstDate;
 			results.forEach(e => {
 				var  classes = '';
