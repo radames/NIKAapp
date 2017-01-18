@@ -31,6 +31,12 @@ block content
 							a(href='/task-map/' + wGroup.key)
 								icon(class="glyphicon glyphicon-stop", id=wGroup.key)
 								= wGroup.name
+		if workingGroups
+			each wGroup, wGroup_i in workingGroups
+				div(id=wGroup._id).hovermsg
+					.panel.panel-info
+						.panel-heading
+							!= wGroup.name
 		if !tasks
 			.jumbotron.text-center
 				h2 Invalid post...

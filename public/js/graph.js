@@ -65,7 +65,6 @@ network.on("hoverNode", function(params){
 
 var actualNode;
 function mouseEvent(e, event) {
-  console.log(e,event);
   switch(e){
   case 'in':
     actualNode = document.getElementById(event.node);
