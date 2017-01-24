@@ -17,8 +17,8 @@ Task.add({
   description: { type: Types.Markdown, wysiwyg: true,  height: 200 , label:'Task Description',},
   assignedTo: { type: Types.Relationship, ref: 'User', index: true, many: true, label:'Assigned To'},
   workingGroup: { type: Types.Relationship, ref: 'WorkingGroup', index: true, many: true, label:'Working Group',},
-  startOn: { type: Types.Date, format: 'DD-MM-YYYY', default: Date.now, label: 'Task starts on'},
-  endOn: { type: Types.Date, format: 'DD-MM-YYYY', default: Date.now, label: 'Task ends on' },
+  startOn: { type: Types.Datetime, default: Date.now, label: 'Task starts on (HH:MM:SS am/pm)'},
+  endOn: { type: Types.Datetime, default: Date.now, label: 'Task ends on (HH:MM:SS am/pm)' },
   regularEvent: { type: Types.Boolean, label: 'Regular Event' }
 
 });

@@ -52,13 +52,13 @@ container.addEventListener('dblclick', function(){
 
 network.on("blurNode", function(params){
   mouseEvent('out', params);
-  container.removeEventListener('mousemove', function(){
+  container.removeEventListener('mousemove', function(event){
     mouseEvent('mousemove', event)
   });
 });
 network.on("hoverNode", function(params){
   mouseEvent('in', params);
-  container.addEventListener('mousemove', function(){
+  container.addEventListener('mousemove', function(event){
     mouseEvent('mousemove', event)
   });
 });
