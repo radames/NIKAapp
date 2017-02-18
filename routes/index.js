@@ -29,7 +29,8 @@ keystone.pre('routes', function (req, res, next) {
 	res.locals.navLinks = [
 		{ label: 'Home', key: 'home', href: '/' },
 		{ label: 'Timeline', key: 'tasks', href: '/timeline' },
-		{ label: 'Task Map', key: 'task-map', href: '/task-map' }
+		{ label: 'Task Map', key: 'task-map', href: '/task-map' },
+		{ label: 'Owncloud', key: 'owncloud', href: '/owncloud' }
 	];
 	res.locals.user = req.user;
 	next();
@@ -57,6 +58,7 @@ exports = module.exports = function (app) {
 	app.get('/', routes.views.index);
 	app.get('/timeline/:workingGroup?', routes.views.tasksList);
 	app.get('/task-map/:workingGroup?', routes.views.graph);
+	app.get('/owncloud/', routes.views.owncloud);
 
 	app.get('/api/list',keystone.middleware.api, routes.api.app.list);
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:

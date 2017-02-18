@@ -1,0 +1,16 @@
+extends ../layouts/default
+
+block content
+	.container: .jumbotron
+		h1 Owncloud
+		hr
+		if user && user.canAccessKeystone
+			p
+				a(href='/admin').btn.btn-lg.btn-primary Open the Admin UI
+		else
+			p
+				a(href='/admin/signin', style='margin-right: 10px').btn.btn-lg.btn-primary Sign in
+				|  to use the Admin UI.
+		hr
+		div
+			iframe(width='800', height='500', scrolling='no', frameborder='no', src= "https://owncloud.hausprojekt-offenbach.org/owncloud/remote.php/webdav/")
