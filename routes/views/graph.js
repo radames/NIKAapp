@@ -80,14 +80,14 @@ exports = module.exports = function (req, res) {
 		q.exec(function (err, results) {
 			locals.graphData.data = results;
 			locals.tasks.data = results;
-			var firstDate;
+			var numEvents = results.length;
 			results.forEach(e => {
 				var  classes = '';
-				if(firstDate === undefined) firstDate = moment(e.startOn);
-				var level = moment(e.startOn).diff(firstDate, 'days');
-				console.log(level);
-				e.workingGroup.forEach(e => classes += e.key + ' ');
-				locals.graphData.nodes.push({id: e._id, label: e.title, level: (e.regularEvent?-1:1+10*level/365)});
+				var level = moment(e.startOn).diff(moment(), 'days');
+				console.log(numEvents, Math.sign(level)*numEvents);
+				e.workingGroup.forEach(e => classes += e.key + ' '); //(e.regularEvent?-1:1+10*level/365)
+				locals.graphData.nodes.push({id: e._id, label: e.title, level:Math.sign(level)*numEvents});
+				numEvents = Math.sign(level) + numEvents;
 			});
 			next(err);
 		});
