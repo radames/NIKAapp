@@ -18,6 +18,10 @@ block content
 								each wGroup, wGroup_i in workingGroups
 									li: a(href='/task-map/' + wGroup.key)
 										= wGroup.name
+			.newTask
+				a(class="btn btn-default" type="button" href='/admin/tasks?create')
+					icon(class="glyphicon glyphicon-pencil")
+					| Add Task 
 			.subtitle
 				if workingGroupFilter
 					h4= workingGroupFilter.name
