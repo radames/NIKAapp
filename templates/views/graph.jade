@@ -52,6 +52,14 @@ block content
 									div
 										!= task.description.html
 									div
+										p.text-muted.text-small
+											if task.startOn
+												|Start on 
+												time(datetime=task.startOn)=task._.startOn.format('Do MMMM YYYY')
+											|<br> 
+											if task.endOn
+												|End on 
+												time(datetime=task.endOn)=task._.endOn.format('Do MMMM YYYY')
 										b Working Group 
 										each wGroup, wGroup_i in task.workingGroup
 											a(href='/task-map/' + wGroup.key)= wGroup.name
