@@ -37,7 +37,7 @@ block content
 								= wGroup.name
 		if workingGroups
 			each wGroup, wGroup_i in workingGroups
-				div(id=wGroup._id).hovermsg
+				div(id=wGroup._id, data="wgroup").hovermsg
 					.panel.panel-info
 						.panel-heading
 							!= wGroup.name

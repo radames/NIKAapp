@@ -62,6 +62,15 @@ network.on("hoverNode", function(params){
     mouseEvent('mousemove', event)
   });
 });
+network.on( 'click', function(params) {
+    //redirect to edit tak
+    var nodeID = params.nodes[0];
+    var el = document.getElementById(nodeID);
+    //check if is a workinggroup node
+    if(!el.getAttribute("data")){
+      window.location.href = window.location.origin + "/admin/tasks/" + nodeID;
+    }
+});
 
 var actualNode;
 function mouseEvent(e, event) {
