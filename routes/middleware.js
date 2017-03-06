@@ -30,7 +30,7 @@ exports.flashMessages = function (req, res, next) {
 exports.requireUser = function (req, res, next) {
 	if (!req.user) {
 		req.flash('error', 'Please sign in to access this page.');
-		res.redirect('/admin/signin');
+		res.redirect('/admin/signin?from=' + req.url);
 	} else {
 		next();
 	}

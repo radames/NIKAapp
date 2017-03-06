@@ -46,6 +46,7 @@ keystone.set('500', function (req, res, next) {
 });
 
 
+
 // Import Route Controllers
 var routes = {
 	views: importRoutes('./views'),
@@ -56,11 +57,11 @@ var routes = {
 exports = module.exports = function (app) {
 	// Views
 	app.get('/', routes.views.index);
-	app.get('/timeline/:workingGroup?', routes.views.tasksList);
-	app.get('/task-map/:workingGroup?', routes.views.graph);
-	app.get('/owncloud/', routes.views.owncloud);
+	app.get('/timeline/:workingGroup?', middleware.requireUser, routes.views.tasksList);
+	app.get('/task-map/:workingGroup?', middleware.requireUser, routes.views.graph);
+	app.get('/owncloud/', middleware.requireUser, routes.views.owncloud);
 
-	app.get('/api/list',keystone.middleware.api, routes.api.app.list);
+	app.get('/api/list', keystone.middleware.api, routes.api.app.list);
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
 
