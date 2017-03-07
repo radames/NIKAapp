@@ -61,7 +61,7 @@ exports = module.exports = function (app) {
 	app.get('/task-map/:workingGroup?', middleware.requireUser, routes.views.graph);
 	app.get('/owncloud/', middleware.requireUser, routes.views.owncloud);
 
-	app.get('/api/list', keystone.middleware.api, routes.api.app.list);
+	app.get('/api/list', [middleware.requireUser,keystone.middleware.api], routes.api.app.list);
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
 
