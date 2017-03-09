@@ -50,7 +50,8 @@ block content
 						div(id=task._id).hovermsg
 							.panel.panel-info
 								.panel-heading
-									!= task.title
+									h4= task.title
+									h5= task.subtitle
 								.panel-body
 									div
 										!= task.description.html
@@ -76,6 +77,7 @@ block content
 							article
 								header
 										h1= task.title
+										h3= task.subtitle
 										a(href='/admin/tasks/' + task._id)
 											icon(class="glyphicon glyphicon-edit")
 								div
