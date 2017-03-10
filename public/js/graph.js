@@ -66,10 +66,12 @@ var initTaskMap = function(data){
   network.on( 'click', function(params) {
       //redirect to edit tak
       var nodeID = params.nodes[0];
-      var el = document.getElementById(nodeID);
-      //check if is a workinggroup node
-      if(!el.getAttribute("data")){
-        window.location.href = window.location.origin + "/admin/tasks/" + nodeID;
+        if(nodeID){
+        var el = document.getElementById(nodeID);
+        //check if is a workinggroup node
+        if(!el.getAttribute("data")){
+          window.location.href = window.location.origin + "/admin/tasks/" + nodeID;
+        }
       }
   });
 

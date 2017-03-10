@@ -8,7 +8,6 @@ block js
 	script(src='/js/graph.js')
 	script.
 		$.getJSON('/api/graph/!{workingGroupFilter.key}', function(data) {
-			console.log(data);
 			initTaskMap(data);
 		});
 
