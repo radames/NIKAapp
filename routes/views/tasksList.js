@@ -17,8 +17,7 @@ exports = module.exports = function (req, res) {
 	locals.workingGroupFilter = '';
 	locals.workingGroups = [];
 	locals.tasks = {
-		data: [],
-		graph: [],
+		data: []
 	};
 
 
@@ -57,11 +56,6 @@ exports = module.exports = function (req, res) {
 		}
 		q.exec(function (err, results) {
 			locals.tasks.data = results;
-			results.forEach(e => {
-				var  classes = '';
-				e.workingGroup.forEach(e => classes += e.key + ' ');
-				locals.tasks.graph.push({id: e._id, content: e.title, start: e.startOn, end: e.endOn, className: classes});
-			});
 			next(err);
 		});
 

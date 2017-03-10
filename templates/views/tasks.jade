@@ -7,7 +7,6 @@ block visHeader
 block js
 	script(src='/js/timeline.js')
 	script.
-		//var items = new vis.DataSet(!{JSON.stringify(tasks.graph)});
 		$.getJSON('/api/tasks/!{workingGroupFilter.key}', function(data) {
 			var items = new vis.DataSet(data);
 			initTimeline(items);
