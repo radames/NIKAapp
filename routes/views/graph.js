@@ -18,12 +18,6 @@ exports = module.exports = function (req, res) {
 
 	locals.workingGroupFilter = '';
 	locals.workingGroups = [];
-	locals.graphData = {
-		data: [],
-		nodes: [],
-		relations:[]
-	};
-
 	locals.tasks = {
 		data: []
 	};
@@ -36,23 +30,7 @@ exports = module.exports = function (req, res) {
 				return next(err);
 			};
 			locals.workingGroups = results;
-
-			// create Relationship between workinggroups and tasks
-			async.each(locals.workingGroups, function (wGroup, next) {
-
-				locals.graphData.nodes.push({id: wGroup._id, label: wGroup.name, key: wGroup.key , level: 0});
-				keystone.list('Task').model.find().where('workingGroup').in([wGroup._id]).exec(function (err, tasks) {
-					tasks.forEach(task => {
-						locals.graphData.relations.push({from: wGroup._id, to: task._id, shape: 'image'}); //fill relations
-					});
-					next(err);
-				});
-
-			}, function (err) {
-				next(err);
-			});
-
-
+			next();
 		});
 	});
 
@@ -78,17 +56,7 @@ exports = module.exports = function (req, res) {
 			q.where('workingGroup').in([locals.workingGroupFilter]);
 		}
 		q.exec(function (err, results) {
-			locals.graphData.data = results;
 			locals.tasks.data = results;
-			var numEvents = results.length;
-			results.forEach(e => {
-				var  classes = '';
-				var level = moment(e.startOn).diff(moment(), 'days');
-				console.log(numEvents, Math.sign(level)*numEvents);
-				e.workingGroup.forEach(e => classes += e.key + ' '); //(e.regularEvent?-1:1+10*level/365)
-				locals.graphData.nodes.push({id: e._id, label: e.title, level:Math.sign(level)*numEvents});
-				numEvents = Math.sign(level) + numEvents;
-			});
 			next(err);
 		});
 

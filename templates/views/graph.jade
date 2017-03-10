@@ -4,7 +4,14 @@ block visHeader
 	link(href="/styles/extra/vis.min.css", rel="stylesheet")
 	link(href="/styles/graph.css", rel="stylesheet")
 
-			
+block js
+	script(src='/js/graph.js')
+	script.
+		$.getJSON('/api/graph/!{workingGroupFilter.key}', function(data) {
+			console.log(data);
+			initTaskMap(data);
+		});
+
 block content
 	.row
 		.col-md-10.col-md-offset-1
@@ -113,11 +120,3 @@ block content
 											b Created by: #{task.createdBy.name.full}
 								hr
 								!= task.description.html
-		
-
-
-block js
-	script.
-		var nodes = !{JSON.stringify(graphData.nodes)};
-		var relations = !{JSON.stringify(graphData.relations)};
-	script(src='/js/graph.js')
