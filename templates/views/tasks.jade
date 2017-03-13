@@ -61,11 +61,11 @@ block content
 										p.text-muted.text-small
 											if task.startOn
 												|Start on 
-												time(datetime=task.startOn)=task._.startOn.format('Do MMMM YYYY')
+												time(datetime=task.startOn.toISOString())=task._.startOn.format('Do MMMM YYYY')
 											|<br> 
 											if task.endOn
 												|End on 
-												time(datetime=task.endOn)=task._.endOn.format('Do MMMM YYYY')	
+												time(datetime=task.endOn.toISOString())=task._.endOn.format('Do MMMM YYYY')	
 										b Working Group 
 										each wGroup, wGroup_i in task.workingGroup
 											a(href='/timeline/' + wGroup.key)= wGroup.name
@@ -86,11 +86,11 @@ block content
 									p.text-muted.text-small  
 										if task.startOn
 											|Start on 
-											time(datetime=task.startOn)=task._.startOn.format('Do MMMM YYYY')
+											time(datetime=task.startOn.toISOString())=task._.startOn.format('Do MMMM YYYY')
 										|  - 
 										if task.endOn
 											|End on 
-											time(datetime=task.endOn)=task._.endOn.format('Do MMMM YYYY')
+											time(datetime=task.endOn.toISOString())=task._.endOn.format('Do MMMM YYYY')
 										if task.workingGroup && task.workingGroup.length
 											p
 											b Working Group 
