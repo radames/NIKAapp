@@ -64,6 +64,8 @@ exports.tasks = function(req, res) {
 
 exports.graph = function(req, res) {
   var workingGroupFilter = req.params.workingGroup;
+  var bShowPast = (req.params.bShowPast == 'true');
+
   var workingGroups = [];
   var graphData = {
     nodes: [],
@@ -93,9 +95,14 @@ exports.graph = function(req, res) {
         if (err) return res.apiError('database error - workinggroup filter', err);
       }).then(function (workingGroupFilterKey) {
 
-        var q = Task.model.find()
-    		.sort('startOn')
-    		.populate('createdBy workingGroup assignedTo');
+        var q = Task.model.find();
+
+        if(!bShowPast){
+          q.find({"startOn": {"$gte": new Date()}});
+        }
+
+    		q.sort('startOn');
+    		q.populate('createdBy workingGroup assignedTo');
     		if(workingGroupFilterKey){
     			q.where('workingGroup').in([workingGroupFilterKey]);
     		}
