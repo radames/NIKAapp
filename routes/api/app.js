@@ -64,7 +64,7 @@ exports.tasks = function(req, res) {
 
 exports.graph = function(req, res) {
   var workingGroupFilter = req.params.workingGroup;
-  var bShowPast = (req.params.bShowPast == 'true');
+  var bShowPast = (req.params.bShowPast == 'all');
 
   var workingGroups = [];
   var graphData = {

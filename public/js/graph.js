@@ -95,3 +95,23 @@ var initTaskMap = function(data){
     }
   };
 };
+var loadTaskMap = function(workingGroup, bShowPast){
+  console.log('/api/graph' + (workingGroup?'/' + workingGroup:'') + (bShowPast?'/' + bShowPast:''));
+  $.getJSON('/api/graph' + (workingGroup?'/' + workingGroup:'') + (bShowPast?'/' + bShowPast:''), function(data) {
+    initTaskMap(data);
+  });
+}
+
+$(document).ready(function(){
+  $(".filterBtns .btn").click(function(){
+    $(this).button('toggle');
+    $(this).text(function(i,old){
+      if(old =='Show Past'){
+        loadTaskMap(sWorkingGroupFilter, 'all');
+      }else{
+        loadTaskMap(sWorkingGroupFilter, '');
+      }
+      return old=='Show Past' ?  'Hide Past' : 'Show Past';
+    });
+  });
+});
