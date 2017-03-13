@@ -42,3 +42,48 @@
   float: left;
   padding-left: 10px;
 }
+
+//specific working groups colours
+#architektur-ag {
+	color: #69D2E7;
+}
+
+#finanz-ag {
+	color: #A7DBD8;
+}
+
+#geschaeftsfuehrung {
+	color: #E0E4CC;
+}
+
+#selbstverstaendnis-ag {
+	color: #F38630;
+}
+
+#vereinsvorstand {
+	color: #FA6900;
+}
+
+#oeffentlichkeits-ag {
+	color: gray;
+}
+
+.legend{
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: bold;
+  vertical-align: baseline;
+  text-align: right;
+
+  div{
+    display: inline-block;;
+    white-space: nowrap;
+
+    & a{
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+  }
+}

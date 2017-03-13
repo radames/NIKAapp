@@ -34,13 +34,14 @@ block content
 				else
 					h4 Alle	
 			#visualization
-			#legend
-				if workingGroups
-					each wGroup, wGroup_i in workingGroups
-						div
-							a(href='/task-map/' + wGroup.key)
-								icon(class="glyphicon glyphicon-stop", id=wGroup.key)
-								= wGroup.name
+			#visfooter
+				.legend
+					if workingGroups
+						each wGroup, wGroup_i in workingGroups
+							div
+								a(href='/task-map/' + wGroup.key)
+									icon(class="glyphicon glyphicon-stop", id=wGroup.key)
+									= wGroup.name
 		if workingGroups
 			each wGroup, wGroup_i in workingGroups
 				div(id=wGroup._id, data="wgroup").hovermsg

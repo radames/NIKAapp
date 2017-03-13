@@ -35,13 +35,14 @@ block content
 				else
 					h4 Alle	
 			#visualization
-			#legend
-				if workingGroups
-					each wGroup, wGroup_i in workingGroups
-						div
-							a(href='/timeline/' + wGroup.key)
-								icon(class="glyphicon glyphicon-stop", id=wGroup.key)
-								= wGroup.name
+			#visfooter
+				.legend
+					if workingGroups
+						each wGroup, wGroup_i in workingGroups
+							div
+								a(href='/timeline/' + wGroup.key)
+									icon(class="glyphicon glyphicon-stop", id=wGroup.key)
+									= wGroup.name
 		if !tasks
 			.jumbotron.text-center
 				h2 Invalid post...
