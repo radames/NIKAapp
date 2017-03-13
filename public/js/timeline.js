@@ -18,7 +18,7 @@ String.prototype.format = function(){
 var initTimeline = function(items){
   // DOM element where the Timeline will be attached
   var container = document.getElementById('visualization');
-
+  container.innerHTML = "";
   // Configuration for the Timeline
   //start window
   var startWindowX = new Date();
@@ -81,3 +81,25 @@ var initTimeline = function(items){
     }
   };
 }
+
+var loadTimeline = function(wGroupPath){
+  console.log('/api/tasks/' + wGroupPath);
+  $.getJSON('/api/tasks/' + wGroupPath, function(data) {
+    var items = new vis.DataSet(data);
+    initTimeline(items);
+  });
+}
+
+$(document).ready(function(){
+  $(".filterBtns .btn").click(function(){
+    $(this).button('toggle');
+    $(this).text(function(i,old){
+      if(old =='Show Past'){
+        loadTimeline((sWorkingGroupFilter?sWorkingGroupFilter + "/all": "all"));
+      }else{
+        loadTimeline(sWorkingGroupFilter);
+      }
+      return old=='Show Past' ?  'Hide Past' : 'Show Past';
+    });
+  });
+});

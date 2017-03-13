@@ -95,9 +95,9 @@ var initTaskMap = function(data){
     }
   };
 };
-var loadTaskMap = function(workingGroup, bShowPast){
-  console.log('/api/graph' + (workingGroup?'/' + workingGroup:'') + (bShowPast?'/' + bShowPast:''));
-  $.getJSON('/api/graph' + (workingGroup?'/' + workingGroup:'') + (bShowPast?'/' + bShowPast:''), function(data) {
+var loadTaskMap = function(wGroupPath){
+  console.log('/api/graph/' + wGroupPath);
+  $.getJSON('/api/graph/' + wGroupPath, function(data) {
     initTaskMap(data);
   });
 }
@@ -107,7 +107,7 @@ $(document).ready(function(){
     $(this).button('toggle');
     $(this).text(function(i,old){
       if(old =='Show Past'){
-        loadTaskMap(sWorkingGroupFilter, 'all');
+        loadTaskMap((sWorkingGroupFilter? sWorkingGroupFilter + '/all' :'all'));
       }else{
         loadTaskMap(sWorkingGroupFilter, '');
       }

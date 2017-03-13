@@ -57,15 +57,21 @@ var routes = {
 exports = module.exports = function (app) {
 	// Views
 	app.get('/', routes.views.index);
-	app.get('/timeline/:workingGroup?', middleware.requireUser, routes.views.tasksList);
+	app.get('/timeline/', middleware.requireUser, routes.views.tasksList);
+	app.get('/timeline/:workingGroup', middleware.requireUser, routes.views.tasksList);
+
 	app.get('/task-map/', middleware.requireUser, routes.views.graph);
 	app.get('/task-map/:workingGroup', middleware.requireUser, routes.views.graph);
 
 	app.get('/owncloud/', middleware.requireUser, routes.views.owncloud);
-	
+
 	app.get('/api/list', [middleware.requireUser,keystone.middleware.api], routes.api.app.list);
+
 	app.get('/api/tasks/', [middleware.requireUser,keystone.middleware.api], routes.api.app.tasks);
+	app.get('/api/tasks/:bShowPast', [middleware.requireUser,keystone.middleware.api], routes.api.app.tasks);
 	app.get('/api/tasks/:workingGroup', [middleware.requireUser,keystone.middleware.api], routes.api.app.tasks);
+	app.get('/api/tasks/:workingGroup/:bShowPast', [middleware.requireUser,keystone.middleware.api], routes.api.app.tasks);
+
 	app.get('/api/graph/', [middleware.requireUser,keystone.middleware.api], routes.api.app.graph);
 	app.get('/api/graph/:bShowPast', [middleware.requireUser,keystone.middleware.api], routes.api.app.graph);
 	app.get('/api/graph/:workingGroup', [middleware.requireUser,keystone.middleware.api], routes.api.app.graph);

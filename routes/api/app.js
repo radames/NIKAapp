@@ -27,6 +27,8 @@ exports.list = function(req, res) {
 exports.tasks = function(req, res) {
 
   var workingGroupFilter = req.params.workingGroup;
+  var bShowPast = (req.params.bShowPast == 'all');
+  console.log(bShowPast);
   var workingGroupFilterKey;
   var tasks = {
     graph: []
@@ -40,9 +42,15 @@ exports.tasks = function(req, res) {
   }).then(function (workingGroupFilterKey) {
 
     // Load the posts
-    var q = Task.model.find()
-    .sort('startOn')
-    .populate('createdBy workingGroup assignedTo');
+    var q = Task.model.find();
+    if(!bShowPast){
+      q.find({ $or:[
+        {"startOn": {"$gte": new Date()}},
+        {"endOn": {"$gte": new Date()}}
+      ]});
+    }
+    q.sort('startOn');
+    q.populate('createdBy workingGroup assignedTo');
     if(workingGroupFilterKey){
       q.where('workingGroup').in([workingGroupFilterKey]);
     }
@@ -96,11 +104,12 @@ exports.graph = function(req, res) {
       }).then(function (workingGroupFilterKey) {
 
         var q = Task.model.find();
-
         if(!bShowPast){
-          q.find({"startOn": {"$gte": new Date()}});
+          q.find({ $or:[
+            {"startOn": {"$gte": new Date()}},
+            {"endOn": {"$gte": new Date()}}
+          ]});
         }
-
     		q.sort('startOn');
     		q.populate('createdBy workingGroup assignedTo');
     		if(workingGroupFilterKey){
