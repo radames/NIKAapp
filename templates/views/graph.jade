@@ -10,6 +10,7 @@ block js
 		var sWorkingGroupFilter = '!{workingGroupFilter.key}';
 		loadTaskMap(sWorkingGroupFilter);
 
+		
 block content
 	.row
 		.col-md-10.col-md-offset-1
@@ -33,92 +34,96 @@ block content
 				else
 					h4 Alle	
 			#visualization
-			#visfooter
-				.filterBtns
-					a(class="btn btn-xs btn-default" type="button")
-						|Show Past
-				.legend
-					if workingGroups
-						each wGroup, wGroup_i in workingGroups
-							div
-								a(href='/task-map/' + wGroup.key)
-									icon(class="glyphicon glyphicon-stop", id=wGroup.key)
-									= wGroup.name
-		if workingGroups
-			each wGroup, wGroup_i in workingGroups
-				div(id=wGroup._id, data="wgroup").hovermsg
-					.panel.panel-info
-						.panel-heading
-							!= wGroup.name
-		if !tasks
-			.jumbotron.text-center
-				h2 Invalid post...
-				p.lead Please check the url and try again
-		else
-			if tasks.data.length
-				each task, i in tasks.data
-						div(id=task._id).hovermsg
-							.panel.panel-info
-								.panel-heading
-									h4= task.title
-									h5= task.subtitle
-								.panel-body
-									div
-										!= task.description.html
-									div
-										p.text-muted.text-small
-											if task.startOn
-												|Start on 
-												time(datetime=task.startOn.toISOString())=task._.startOn.format('Do MMMM YYYY')
-											|<br> 
-											if task.endOn
-												|End on 
-												time(datetime=task.endOn.toISOString())=task._.endOn.format('Do MMMM YYYY')
-										b Working Group 
-										each wGroup, wGroup_i in task.workingGroup
-											a(href='/task-map/' + wGroup.key)= wGroup.name
-											if wGroup_i < task.workingGroup.length - 1
-												| , 
-											else
-												| 
-							
-						.col-md-8.col-md-offset-2
-							hr
-							article
-								header
-										h1= task.title
-										h3= task.subtitle
-										a(href='/admin/tasks/' + task._id)
-											icon(class="glyphicon glyphicon-edit")
-								div
-									p.text-muted.text-small
-										if task.startOn
-											|Start on 
-											time(datetime=task.startOn.toISOString())=task._.startOn.format('Do MMMM YYYY')
-										|  - 
-										if task.endOn
-											|End on 
-											time(datetime=task.endOn.toISOString())=task._.endOn.format('Do MMMM YYYY')
-										if task.workingGroup && task.workingGroup.length
-											p
-											b Working Group 
-											each wGroup, wGroup_i in task.workingGroup
-												a(href='/task-map/' + wGroup.key)= wGroup.name
-												if wGroup_i < task.workingGroup.length - 1
-													| , 
-												else
-													| 
-										if task.assignedTo && task.assignedTo.length
-											p
-											b Assigned to: 				
-											each aTo, aTo_i in task.assignedTo
-												a(href='/blog/' + aTo.key)= aTo.name.full
-												if aTo_i < task.assignedTo.length - 1
-													| , 
-												else
-													| 
-										if task.createdBy
-											p
-											b Created by: #{task.createdBy.name.full}
-								hr
-								!= task.description.html
+			.filterBtns
+				a(class="btn btn-xs btn-default" type="button")
+					|Show Past
+			.legend
+				if workingGroups
+					each wGroup, wGroup_i in workingGroups
+						div
+							a(href='/task-map/' + wGroup.key)
+								icon(class="glyphicon glyphicon-stop", id=wGroup.key)
+								= wGroup.name
+		.col-md-10.col-md-offset-1
+			.tasksList
+				if !tasks
+					.jumbotron.text-center
+						h2 Invalid post...
+						p.lead Please check the url and try again
+				else
+					if tasks.data
+						.search-tabs-wrapper
+							ul.nav.nav-tabs
+								li.active
+									a(href="#future" data-toggle="tab") Future Events
+								li
+									a(href="#past" data-toggle="tab") Past Events
+							.tab-content
+								each data, key in tasks.data
+									.tab-pane.fade(id=key, class = (key === "future" ? "active in" : ""))
+										each task, i in data
+											div
+												article
+													header
+															h1= task.title
+															h3= task.subtitle
+															a(href='/admin/tasks/' + task._id)
+																icon(class="glyphicon glyphicon-edit")
+													div
+														p.text-muted.text-small  
+															if task.startOn
+																|Start on 
+																time(datetime=task.startOn.toISOString())=task._.startOn.format('Do MMMM YYYY')
+															|  - 
+															if task.endOn
+																|End on 
+																time(datetime=task.endOn.toISOString())=task._.endOn.format('Do MMMM YYYY')
+															if task.workingGroup && task.workingGroup.length
+																p
+																b Working Group 
+																each wGroup, wGroup_i in task.workingGroup
+																	a(href='/task-map/' + wGroup.key)= wGroup.name
+																	if wGroup_i < task.workingGroup.length - 1
+																		| , 
+																	else
+																		| 
+															if task.assignedTo && task.assignedTo.length
+																p
+																b Assigned to: 				
+																each aTo, aTo_i in task.assignedTo
+																	a(href='/blog/' + aTo.key)= aTo.name.full
+																	if aTo_i < task.assignedTo.length - 1
+																		| , 
+																	else
+																		| 
+															if task.createdBy
+																p
+																b Created by: #{task.createdBy.name.full}
+													!= task.description.html
+						//Hover panel
+						each data, key in tasks.data
+							each task, i in data
+								div(id=task._id).hovermsg
+									.panel.panel-info
+										.panel-heading
+											h4= task.title
+											h5= task.subtitle
+										.panel-body
+											div
+												!= task.description.html
+											div
+												p.text-muted.text-small
+													if task.startOn
+														|Start on 
+														time(datetime=task.startOn.toISOString())=task._.startOn.format('Do MMMM YYYY')
+													|<br> 
+													if task.endOn
+														|End on 
+														time(datetime=task.endOn.toISOString())=task._.endOn.format('Do MMMM YYYY')	
+												b Working Group 
+												each wGroup, wGroup_i in task.workingGroup
+													a(href='/task-map/' + wGroup.key)= wGroup.name
+													if wGroup_i < task.workingGroup.length - 1
+														| , 
+													else
+														| 

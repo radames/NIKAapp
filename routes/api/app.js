@@ -26,12 +26,15 @@ exports.list = function(req, res) {
 
 exports.tasks = function(req, res) {
 
-  var workingGroupFilter = req.params.workingGroup;
   var bShowPast = (req.params.bShowPast == 'all');
-  console.log(bShowPast);
-  var workingGroupFilterKey;
+  var workingGroupFilter = req.params.workingGroup;
+
+  if(workingGroupFilter === 'all'){
+    bShowPast = true;
+    workingGroupFilter = '';
+  }
   var tasks = {
-    graph: []
+      graph: []
   };
 
   // Load the current category filter
@@ -71,8 +74,13 @@ exports.tasks = function(req, res) {
 }
 
 exports.graph = function(req, res) {
-  var workingGroupFilter = req.params.workingGroup;
   var bShowPast = (req.params.bShowPast == 'all');
+  var workingGroupFilter = req.params.workingGroup;
+
+  if(workingGroupFilter === 'all'){
+    bShowPast = true;
+    workingGroupFilter = '';
+  }
 
   var workingGroups = [];
   var graphData = {

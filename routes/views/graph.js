@@ -19,7 +19,7 @@ exports = module.exports = function (req, res) {
 	locals.workingGroupFilter = '';
 	locals.workingGroups = [];
 	locals.tasks = {
-		data: []
+		data : {},
 	};
 
 
@@ -46,20 +46,45 @@ exports = module.exports = function (req, res) {
 		}
 	});
 
-	// Load filtered tasks
+
+	// Load the posts
 	view.on('init', function (next) {
 
-		var q = Task.model.find()
-		.sort('startOn')
-		.populate('createdBy workingGroup assignedTo');
+		var q = Task.model.find();
+		q.sort('startOn')
+		q.populate('createdBy workingGroup assignedTo');
 		if(locals.workingGroupFilter){
 			q.where('workingGroup').in([locals.workingGroupFilter]);
 		}
+		//future
+		q.find({ $or:[
+			{"startOn": {"$gte": new Date()}},
+			{"endOn": {"$gte": new Date()}}
+		]});
 		q.exec(function (err, results) {
-			locals.tasks.data = results;
+			locals.tasks.data['future'] = results;
 			next(err);
 		});
+	});
 
+	// Load the posts
+	view.on('init', function (next) {
+
+		var q = Task.model.find();
+		q.sort('startOn')
+		q.populate('createdBy workingGroup assignedTo');
+		if(locals.workingGroupFilter){
+			q.where('workingGroup').in([locals.workingGroupFilter]);
+		}
+		//past
+		q.find({ $or:[
+			{"startOn": {"$lt": new Date()}},
+			{"endOn": {"$lt": new Date()}}
+		]});
+		q.exec(function (err, results) {
+			locals.tasks.data['past'] = results;
+			next(err);
+		});
 	});
 	// Render the view
 	view.render('graph');
