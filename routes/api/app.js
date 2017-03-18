@@ -96,7 +96,7 @@ exports.graph = function(req, res) {
     // create Relationship between workinggroups and tasks
     async.each(workingGroups, function (wGroup, next) {
 
-      graphData.nodes.push({id: wGroup._id, label: wGroup.name, key: wGroup.key , level: 0});
+      graphData.nodes.push({id: wGroup._id, label: wGroup.name, key: wGroup.key , level: 0, fixed: true, physics:false});
       keystone.list('Task').model.find().where('workingGroup').in([wGroup._id]).exec(function (err, tasks) {
         tasks.forEach(task => {
           graphData.edges.push({from: wGroup._id, to: task._id, shape: 'image'}); //fill relations
@@ -115,7 +115,8 @@ exports.graph = function(req, res) {
         if(!bShowPast){
           q.find({ $or:[
             {"startOn": {"$gte": new Date()}},
-            {"endOn": {"$gte": new Date()}}
+            {"endOn": {"$gte": new Date()}},
+            {"regularEvent": {"$eq": true}}
           ]});
         }
     		q.sort('startOn');
@@ -125,13 +126,13 @@ exports.graph = function(req, res) {
     		}
     		q.exec(function (err, results) {
     			var numEvents = results.length;
+          var level = 0;
     			results.forEach(e => {
     				var  classes = '';
-    				var level = moment(e.startOn).diff(moment(), 'days');
-    				console.log(numEvents, Math.sign(level)*numEvents);
+    				var diff = moment(e.startOn).diff(moment(), 'days');
     				e.workingGroup.forEach(e => classes += e.key + ' '); //(e.regularEvent?-1:1+10*level/365)
-    				graphData.nodes.push({id: e._id, label: e.title, level:Math.sign(level)*numEvents});
-    				numEvents = Math.sign(level) + numEvents;
+    				graphData.nodes.push({id: e._id, label: e.title, level: e.regularEvent? -1: 1 + level});
+            if(!e.regularEvent) level++;
     			});
 
           res.apiResponse(graphData);
