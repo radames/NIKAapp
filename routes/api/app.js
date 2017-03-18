@@ -126,13 +126,13 @@ exports.graph = function(req, res) {
     		}
     		q.exec(function (err, results) {
     			var numEvents = results.length;
-          var level = 0;
+          var levelR = 1;
+          var levelL = -1;
     			results.forEach(e => {
     				var  classes = '';
     				var diff = moment(e.startOn).diff(moment(), 'days');
-    				e.workingGroup.forEach(e => classes += e.key + ' '); //(e.regularEvent?-1:1+10*level/365)
-    				graphData.nodes.push({id: e._id, label: e.title, level: e.regularEvent? -1: 1 + level});
-            if(!e.regularEvent) level++;
+    				e.workingGroup.forEach(e => classes += e.key + ' ');
+    				graphData.nodes.push({id: e._id, label: e.title, level: e.regularEvent? levelL--: levelR++});
     			});
 
           res.apiResponse(graphData);
