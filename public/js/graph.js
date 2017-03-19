@@ -63,10 +63,10 @@ var initTaskMap = function(data){
     maxScale = network.getScale();
   });
   network.on("zoom", function (params) {
-    if(params.scale >= maxScale){
+    if(params.scale >= maxScale*2){
       var opts = {
         position: {x:params.pointer.x, y:params.pointer.y},
-        scale: maxScale
+        scale: maxScale*2
       }
       network.moveTo(opts);
     }else if(params.scale <= maxScale*0.5){
