@@ -27,7 +27,7 @@ var initTaskMap = function(data){
       layout: { hierarchical: { sortMethod: 'directed', direction: 'LR' }
     },
     interaction:{
-      hover: true
+      hover: true,
     },
     nodes: {
       shape: 'dot',
@@ -63,10 +63,21 @@ var initTaskMap = function(data){
     maxScale = network.getScale();
   });
   network.on("zoom", function (params) {
-    console.log(params.scale);
+    if(params.scale >= maxScale){
+      var opts = {
+        position: {x:params.pointer.x, y:params.pointer.y},
+        scale: maxScale
+      }
+      network.moveTo(opts);
+    }else if(params.scale <= maxScale*0.5){
+      var opts = {
+        position: {x:params.pointer.x, y:params.pointer.y},
+        scale: maxScale*0.5
+      }
+      network.moveTo(opts);
+    }
   });
   network.on("blurNode", function(params){
-    console.log(params);
     mouseEvent('out', params);
     container.removeEventListener('mousemove', function(event){
       mouseEvent('mousemove', event)
