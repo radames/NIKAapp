@@ -30,7 +30,7 @@ keystone.pre('routes', function (req, res, next) {
 		{ label: 'Home', key: 'home', href: '/' },
 		{ label: 'Timeline', key: 'tasks', href: '/timeline' },
 		{ label: 'Task Map', key: 'task-map', href: '/task-map' },
-		{ label: 'Owncloud', key: 'owncloud', href: '/owncloud' }
+		{ label: 'Nextcloud', key: 'nextcloud', href: '/nextcloud' }
 	];
 	res.locals.user = req.user;
 	next();
@@ -63,7 +63,7 @@ exports = module.exports = function (app) {
 	app.get('/task-map/', middleware.requireUser, routes.views.graph);
 	app.get('/task-map/:workingGroup', middleware.requireUser, routes.views.graph);
 
-	app.get('/owncloud/', middleware.requireUser, routes.views.owncloud);
+	app.get('/nextcloud/', middleware.requireUser, routes.views.nextcloud);
 
 	app.get('/api/list', [middleware.requireUser,keystone.middleware.api], routes.api.app.list);
 
