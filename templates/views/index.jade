@@ -2,13 +2,18 @@ extends ../layouts/default
 
 block content
 	.container: .jumbotron
-		h1 Welcome
+		h1 Welcome to NIKAapp
 		hr
-		if user && user.canAccessKeystone
-			p
-				a(href='/admin').btn.btn-lg.btn-primary Open the Admin UI
-		else
-			p
-				a(href='/admin/signin', style='margin-right: 10px').btn.btn-lg.btn-primary Sign in
-				|  to use the Admin UI.
+		p
+			a(href='/task-map', style='margin-right: 10px').btn.btn-lg.btn-primary Task Map
+			|  to see the Tasks Map.
+		p
+			a(href='/timeline', style='margin-right: 10px').btn.btn-lg.btn-primary Timeline
+			|  to see the Timeline.
+		p
+			a(href='/nextcloud', style='margin-right: 10px').btn.btn-lg.btn-primary Nextcloud
+			|  to see the Nexcloud page.
+		p
+			a(href='/admin/tasks', style='margin-right: 10px').btn.btn-lg.btn-primary Tasks Admin
+			|  to see the Tasks Admin Interface.
 		hr
