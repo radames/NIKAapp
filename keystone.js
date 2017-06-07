@@ -9,8 +9,8 @@ var keystone = require('keystone');
 // and documentation.
 
 keystone.init({
-	'name': 'dasHaus',
-	'brand': 'dasHaus',
+	'name': 'NIKAapp',
+	'brand': 'NIKAapp',
 
 	'admin path': 'admin',
 	'sass': 'public',
