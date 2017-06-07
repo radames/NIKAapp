@@ -2,15 +2,13 @@ extends ../layouts/default
 
 block content
 	.container: .jumbotron
-		h1 Owncloud
+		h1 Nexcloud
 		hr
 		if user && user.canAccessKeystone
+			.alert.alert-info
+				strong Download der Nextcloud-Inhalte hier!
+				|<br>
+				|(Upload und Änderung der Daten auf Nextcloud ist nur über den individuellen Nextcloud-Account möglich)
 			p
-				a(href='/admin').btn.btn-lg.btn-primary Open the Admin UI
-		else
-			p
-				a(href='/admin/signin', style='margin-right: 10px').btn.btn-lg.btn-primary Sign in
-				|  to use the Admin UI.
+				a(href="https://cloud.nika.haus/nextcloud/index.php/s/" , target="_blank").btn.btn-lg.btn-primary Open the Open Nextcloud Data
 		hr
-		div
-			iframe(width='800', height='500', scrolling='no', frameborder='no', src= "https://owncloud.nika.haus/owncloud/remote.php/webdav/")
