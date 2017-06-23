@@ -1,18 +1,20 @@
 # NIKAapp
-## About
+## Applicate Against Time
 
-Waged labour planned economy promises control over time by raising efficiency.                                               
+Wage labour planned economy promises control over time by raising efficiency.               
 
-Unlike the emperor dressed in nothing, time is nothing dressed in clothes.
+Unlike the emperor dressed in nothing, time is nothing dressed in clothes.   
 
-At the beginning of the 1920s, proletarian settlers in Vienna developed a planned economy of housing typologies. These were discussed with lantern slides, projected by architect [Margarete Lihotzky](https://en.wikipedia.org/wiki/Margarete_Sch%C3%BCtte-Lihotzky).
-There are libraries of tools to dress up time – and turn offices into living space. 	
+In the beginning of the 1920s, proletarian settlers in Vienna developed their own planned economy of improvised housing. The settlers' building typologies were discussed with lantern slides, projected by architect Margarete Lihotzky.  
+                                                                       
+There are libraries of tools to attire time – and turn offices into living space.     
 
-In Frankfurt am Main vacant offices amount to more than two million square metres of unused urban space - this is equal to the total amount of living space provided by one of the city’s larger districts. Applicate Against Time repurposes these commercially created tools for new social contexts. [NIKA.haus](https://nika.haus/en) is a syndicate project which will prove that the transformation of offices into living space for solidary and non-commercial housing is a realistic alternative.
+In Frankfurt am Main vacant offices amount to more than two million square metres of unused urban space - this equals the total amount of living space provided by one of the City’s larger districts. Against this development the project NIKA.haus will prove that the transformation of offices into living space in a solidary and non-commercial syndicate of tenements is a realistic alternative. For further information visit: [www.nika.haus/en](www.nika.haus/en)
+    
+NIKA.haus time planning software repository [here](https://github.com/radames/NIKAapp)
 
-Find more information on how to support the project with a direct loan: [www.nika.haus/en](https://nika.haus/en)
-
-Applicate Against Time
+Jeronimo Voss in collaboration with Radamés Ajna, 2017
+- Supported by [The New Observatory](http://www.fact.co.uk/projects/the-new-observatory.aspx) at [FACT Liverppol](http://www.fact.co.uk/)
 
 ## Install
 
