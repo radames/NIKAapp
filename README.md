@@ -11,7 +11,7 @@ There are libraries of tools to attire time – and turn offices into living spa
 
 In Frankfurt am Main vacant offices amount to more than two million square metres of unused urban space - this equals the total amount of living space provided by one of the city’s larger districts. Against this development the project NIKA.haus will prove that the transformation of offices into living space in a solidary and non-commercial syndicate of tenements is a realistic alternative. For further information visit: [www.nika.haus/en](www.nika.haus/en)
     
-NIKA.haus time planning software repository [here.](https://github.com/radames/NIKAapp)
+Find NIKA.haus time planning software repository [here.](https://github.com/radames/NIKAapp)
 
 Jeronimo Voss in collaboration with Radamés Ajna, 2017
 - Supported by [The New Observatory](http://www.fact.co.uk/projects/the-new-observatory.aspx) at [FACT Liverpool](http://www.fact.co.uk/)
