@@ -16,6 +16,11 @@ Find NIKA.haus time planning software repository [here.](https://github.com/rada
 Jeronimo Voss in collaboration with Radamés Ajna, 2017
 - Supported by [The New Observatory](http://www.fact.co.uk/projects/the-new-observatory.aspx) at [FACT Liverpool](http://www.fact.co.uk/)
 
+## Video
+
+[![Applicate Against Time, 2017](https://i.vimeocdn.com/video/642402808.webp?mw=2000&mh=1123&q=70)](https://vimeo.com/223572653 "Applicate Against Time, 2017")
+
+
 ## Install
 
 How to setup the environment [here.](install.md)
