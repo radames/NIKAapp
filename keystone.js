@@ -23,6 +23,8 @@ keystone.init({
 	'session': true,
 	'auth': true,
 	'user model': 'User',
+	'cookie secret': process.env.COOKIE_SECRET,
+
 });
 
 // Load your project's Models
