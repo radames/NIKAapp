@@ -15,7 +15,7 @@ new Email('test-email.jade', {
 	to: 'radamajna@gmail.com',
 	from: {
 		name: 'NIKAApp',
-		email: 'hello@nika.haus',
+		email: 'no-reply@nika.haus',
 	},
 	subject: 'Testing the first email',
 }, function(err, result) {
