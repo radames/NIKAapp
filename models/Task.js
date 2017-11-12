@@ -29,19 +29,27 @@ Task.defaultColumns = 'title, subtitle, workingGroup, startOn, endOn, createdBy'
 Task.schema.methods.isSchedulerOn = function() {
 	return this.emailNotificaionsOn;
 }
-
 Task.schema.pre('save', function(next) {
-	if (this.notificationPeriods.length < 10) {
-    console.log(this.notificationPeriods);
-		var err = new Error('The only valid Time units are units of, Hours, Days and Weeks');
-		next(err);
-	}
+  var regPeriod = /(\d+ week|\d+ day|\d+ hour)/;
+
+	this.notificationPeriods.forEach(function(item) {
+    item = item.toLowerCase();
+
+    var s = item.trim().split(" ");
+		var num = s[0];
+		var timePeriod = s[1];
+    if(!regPeriod.test(item) || !Number.isInteger(parseFloat(num))){
+      //test for a digit and the periods
+      var err = new Error('The only valid Time units are integers units of, Hours, Days and Weeks --> ' + item);
+      next(err);
+    }
+    console.log(num, timePeriod, " ------- GOOD");
+	});
+
 	next();
 });
-
 Task.schema.post('save', function(next) {
 	console.log(this.isSchedulerOn(), this.startOn, this.endOn);
-	next();
 });
 
 Task.register();
