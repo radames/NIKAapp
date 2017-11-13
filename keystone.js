@@ -7,6 +7,7 @@ var keystone = require('keystone');
 // Initialise Keystone with your project's configuration.
 // See http://keystonejs.com/guide/config for available options
 // and documentation.
+var agenda = require('./lib/agenda/agenda');
 
 keystone.init({
 	'name': 'NIKAapp',
@@ -18,7 +19,6 @@ keystone.init({
 	'favicon': 'public/favicon.ico',
 	'views': 'templates/views',
 	'view engine': 'jade',
-
 	'auto update': true,
 	'session': true,
 	'auth': true,
