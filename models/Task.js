@@ -59,38 +59,18 @@ Task.schema.post('save', function(next) {
 var templatePath = './templates/emails/taskNotification.jade';
 Task.schema.methods.taskNotification = function(callback) {
     console.log(this.assignedTo);
+    var taskData = this;
     this.assignedTo.forEach(function(userKey){
       console.log("Seraching --- >", userKey);
-      keystone.list('User').model.findOne({ _id: userKey }).exec(function (err, result) {
-          console.log(result);
+      keystone.list('User').model.findOne({ _id: userKey }).exec(function (err, user) {
+          if(err) return done(err);
+          user.sendEmailNotification(function(err){
+                if(err) done(err);
+                //user.welcomeMailSend = true;
+                //user.save(function(){ done(); })}
+              }, {taskData});
       });
     });
-
-
-    // var Email = require('keystone-email');
-    // new  Email(templatePath, {
-    // 	transport: 'mailgun',
-    // }).send({data:{
-    // 	title: 'Title',
-    // 	subtitle: 'Subtitle',
-    // 	body: 'lslslslslslsllslsls ls lslslssl sl slslsls',
-    //
-    // }}, {
-    // 	apiKey: process.env.MAILGUN_API_KEY,
-    // 	domain: process.env.MAILGUN_DOMAIN,
-    // 	to: 'radamajna@gmail.com',
-    // 	from: {
-    // 		name: 'NIKAApp',
-    // 		email: 'no-reply@nika.haus',
-    // 	},
-    // 	subject: 'Testing the first email',
-    // }, function(err, result) {
-    // 	if (err) {
-    // 		console.error('🤕 Mailgun test failed with error:\n', err);
-    // 	} else {
-    // 		console.log('📬 Successfully sent Mailgun test with result:\n', result);
-    // 	}
-    // });
 
 };
 
