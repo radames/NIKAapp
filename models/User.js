@@ -27,30 +27,34 @@ User.schema.methods.wasActive = function () {
 }
 
 var templatePath = './templates/emails/taskNotification.jade';
-User.schema.methods.sendEmailNotification = function(callback, data){
+User.schema.methods.sendEmailNotification = function(taskId, callback) {
 	var user = this;
-  console.log(data.taskData);
-	var Email = require('keystone-email');
-	new  Email(templatePath, {
-		transport: 'mailgun',
-	}).send({data: data.taskData}, {
-		apiKey: process.env.MAILGUN_API_KEY,
-		domain: process.env.MAILGUN_DOMAIN,
-		to: {
-			name: this.name,
-			email: this.email,
-		},
-		from: {
-			name: process.env.EMAIL_NAME,
-			email: process.env.NOREPLY_EMAIL,
-		},
-		subject: 'Testing the first email',
-	}, function(err, result) {
-		if (err) {
-			console.error('🤕 Mailgun test failed with error:\n', err);
-		} else {
-			console.log('📬 Successfully sent Mailgun test with result:\n', result);
-		}
+	var Task = keystone.list('Task');
+	Task.model.findOne({
+		_id: taskId
+	}, function(err, task) {
+		//Lookup Task and fill up notification email
+
+		var Email = require('keystone-email');
+
+		new Email(templatePath, {
+				transport: 'mailgun',
+			})
+			.send({
+				task: task
+			}, {
+				apiKey: process.env.MAILGUN_API_KEY,
+				domain: process.env.MAILGUN_DOMAIN,
+				to: {
+					name: user.name,
+					email: user.email,
+				},
+				from: {
+					name: process.env.EMAIL_NAME,
+					email: process.env.NOREPLY_EMAIL,
+				},
+				subject: process.env.EMAIL_SUBJECT + task.title,
+			}, callback);
 	});
 }
 
