@@ -53,7 +53,7 @@ User.schema.methods.sendEmailNotification = function(taskId, callback) {
 					name: process.env.EMAIL_NAME,
 					email: process.env.NOREPLY_EMAIL,
 				},
-				subject: process.env.EMAIL_SUBJECT + task.title,
+				subject: process.env.EMAIL_SUBJECT + ' ' + task.title,
 			}, callback);
 	});
 }
