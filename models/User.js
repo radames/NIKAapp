@@ -34,7 +34,7 @@ User.schema.methods.sendEmailNotification = function(taskId, callback) {
 		_id: taskId
 	}, function(err, task) {
 		//Lookup Task and fill up notification email
-
+		keystone.debug('Writing Email to ' +  user.name + ' ' + user.email);
 		var Email = require('keystone-email');
 
 		new Email(templatePath, {

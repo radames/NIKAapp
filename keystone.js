@@ -3,7 +3,10 @@
 require('dotenv').config();
 
 // Require keystone
+var debug = require('debug')('keystone');
 var keystone = require('keystone');
+const name = 'nikaapp keystone'
+debug('booting %s', name)
 // Initialise Keystone with your project's configuration.
 // See http://keystonejs.com/guide/config for available options
 // and documentation.
@@ -50,5 +53,6 @@ keystone.set('nav', {
 
 // Start Keystone to connect to your database and initialise the web server
 keystone.start(function(){
+	keystone.debug = debug;
 	keystone.agenda = agenda(['emailNotification']);
 });

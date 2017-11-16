@@ -36,7 +36,7 @@ Task.schema.pre('save', function(next) {
       this.emailNotificaionsOn = false;
       next(err);
     }
-    console.log(this.notificationPeriods);
+    keystone.debug(this.notificationPeriods);
     var filtered = [];
     this.notificationPeriods.forEach(function(item) {
       item = item.toLowerCase();
@@ -50,14 +50,14 @@ Task.schema.pre('save', function(next) {
         next(err);
       }
       filtered.push([num,timePeriod].join(' '));
-      console.log(num, timePeriod, " ------- GOOD");
     });
+    keystone.debug(filtered + " filtered time periods");
     this.notificationPeriods = filtered;
   }
 	next();
 });
 Task.schema.post('save', function(next) {
-	console.log(this.isSchedulerOn(), this.startOn, this.endOn);
+  keystone.debug( this.isSchedulerOn(), this.startOn, this.endOn);
   if(this.isSchedulerOn()){
     this.taskNotification();
   }
@@ -67,14 +67,18 @@ Task.schema.post('save', function(next) {
 var templatePath = './templates/emails/taskNotification.jade';
 Task.schema.methods.taskNotification = function(callback) {
   var _task = this;
-	console.log(_task.assignedTo);
+  keystone.debug("Task assigned to -> " + _task.assignedTo)
 	if (_task.isSchedulerOn) {
 		//first cancel all other notifications for this specific tasks
 		keystone.agenda.cancel({ "data.taskId": _task._id }, function(err, jobs) {
-			if (err) console.log('error deleting old job');
-			console.log('Removing old scheudle');
+			if (err) {
+        debug('error deleting old jobs');
+        var err = new Error('error deleting old jobs');
+        callback(err);
+      }
+			keystone.debug('Removing old jobs');
 			_task.assignedTo.forEach(function(_userid) {
-				console.log("Scheduler ON\n\n\n");
+        keystone.debug('Scheduling new job');
 				keystone.agenda.schedule('in 10 seconds', 'notification email', {
 					userId: _userid,
 					taskId: _task._id
