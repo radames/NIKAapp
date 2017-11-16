@@ -30,22 +30,30 @@ Task.schema.methods.isSchedulerOn = function() {
 	return this.emailNotificaionsOn;
 }
 Task.schema.pre('save', function(next) {
-  var regPeriod = /(\d+ week|\d+ day|\d+ hour)/;
-
-	this.notificationPeriods.forEach(function(item) {
-    item = item.toLowerCase();
-
-    var s = item.trim().split(" ");
-		var num = s[0];
-		var timePeriod = s[1];
-    if(!regPeriod.test(item) || !Number.isInteger(parseFloat(num))){
-      //test for a digit and the periods
-      var err = new Error('The only valid Time units are integers units of, Hours, Days and Weeks --> ' + item);
+  if(this.emailNotificaionsOn){
+    if(!this.notificationPeriods.length){
+      var err = new Error('You need to insert at least one notification period');
+      this.emailNotificaionsOn = false;
       next(err);
     }
-    console.log(num, timePeriod, " ------- GOOD");
-	});
-
+    console.log(this.notificationPeriods);
+    var filtered = [];
+    this.notificationPeriods.forEach(function(item) {
+      item = item.toLowerCase();
+      var regPeriod = /(\d+ week|\d+ day|\d+ hour|\d+ second)/;
+      var s = item.trim().split(" ");
+      var num = s[0];
+      var timePeriod = s[1];
+      if(!regPeriod.test(item) || !Number.isInteger(parseFloat(num))){
+        //test for a digit and the periods
+        var err = new Error('The only valid Time units are integers units of, Hours, Days and Weeks --> ' + item);
+        next(err);
+      }
+      filtered.push([num,timePeriod].join(' '));
+      console.log(num, timePeriod, " ------- GOOD");
+    });
+    this.notificationPeriods = filtered;
+  }
 	next();
 });
 Task.schema.post('save', function(next) {
