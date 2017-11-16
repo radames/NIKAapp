@@ -1,5 +1,6 @@
 var keystone = require('keystone');
 var Types = keystone.Field.Types;
+var humanInterval = require('human-interval');
 
 var Task = new keystone.List('Task',{
   track: true,
@@ -40,7 +41,7 @@ Task.schema.pre('save', function(next) {
     var filtered = [];
     this.notificationPeriods.forEach(function(item) {
       item = item.toLowerCase();
-      var regPeriod = /(\d+ week|\d+ day|\d+ hour|\d+ second)/;
+      var regPeriod = /(\d+ week|\d+ day|\d+ hour|\d+ second|\d+ minute)/;
       var s = item.trim().split(" ");
       var num = s[0];
       var timePeriod = s[1];
@@ -66,22 +67,30 @@ Task.schema.post('save', function(next) {
 //Sends the user a welcome email
 var templatePath = './templates/emails/taskNotification.jade';
 Task.schema.methods.taskNotification = function(callback) {
-  var _task = this;
-  keystone.debug("Task assigned to -> " + _task.assignedTo)
+	var _task = this;
+	keystone.debug("Task assigned to -> " + _task.assignedTo)
 	if (_task.isSchedulerOn) {
 		//first cancel all other notifications for this specific tasks
-		keystone.agenda.cancel({ "data.taskId": _task._id }, function(err, jobs) {
+		keystone.agenda.cancel({
+			"data.taskId": _task._id
+		}, function(err, jobs) {
 			if (err) {
-        debug('error deleting old jobs');
-        var err = new Error('error deleting old jobs');
-        callback(err);
-      }
+				debug('error deleting old jobs');
+				var err = new Error('error deleting old jobs');
+				callback(err);
+			}
 			keystone.debug('Removing old jobs');
 			_task.assignedTo.forEach(function(_userid) {
-        keystone.debug('Scheduling new job');
-				keystone.agenda.schedule('in 10 seconds', 'notification email', {
-					userId: _userid,
-					taskId: _task._id
+				keystone.debug('Scheduling new job');
+				//create as many jobs as setted periods
+				_task.notificationPeriods.forEach(function(taskPeriod, i) {
+					keystone.debug(new Date(_task.startOn - humanInterval(taskPeriod)));
+					var job = keystone.agenda.schedule(new Date(_task.startOn - humanInterval(taskPeriod)), 'notification email', {
+						index: i,
+						userId: _userid,
+						taskId: _task._id
+					});
+					keystone.debug('Scheduled job', job.attrs);
 				});
 			});
 		});
