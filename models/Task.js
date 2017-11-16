@@ -58,20 +58,22 @@ Task.schema.post('save', function(next) {
 //Sends the user a welcome email
 var templatePath = './templates/emails/taskNotification.jade';
 Task.schema.methods.taskNotification = function(callback) {
-	console.log(this.assignedTo);
-	var _taskId = this._id;
-	if (this.isSchedulerOn) {
-    //if enable schedule, then schedule email for all users
-		this.assignedTo.forEach(function(_userid) {
-      console.log("Scheduler ON\n\n\n");
-      var job = keystone.agenda.create('notification email', {userId: _userid, taskId: _taskId});
-		  job.unique();
-      job.schedule('in 10 seconds');
-      job.save(function(err){
-          console.log('Random hotspot job saved');
-      });
-      // keystone.agenda.schedule(new Date(Date.now() + 5000), 'notification email', {userId: _userid, taskId: _taskId});
+  var _task = this;
+	console.log(_task.assignedTo);
+	if (_task.isSchedulerOn) {
+		//first cancel all other notifications for this specific tasks
+		keystone.agenda.cancel({ "data.taskId": _task._id }, function(err, jobs) {
+			if (err) console.log('error deleting old job');
+			console.log('Removing old scheudle');
+			_task.assignedTo.forEach(function(_userid) {
+				console.log("Scheduler ON\n\n\n");
+				keystone.agenda.schedule('in 10 seconds', 'notification email', {
+					userId: _userid,
+					taskId: _task._id
+				});
+			});
 		});
+		//if enable schedule, then schedule email for all users
 	}
 };
 
