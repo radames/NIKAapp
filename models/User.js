@@ -30,13 +30,19 @@ var templatePath = './templates/emails/taskNotification.jade';
 User.schema.methods.sendEmailNotification = function(taskId, callback) {
 	var user = this;
 	var Task = keystone.list('Task');
-	Task.model.findOne({
-		_id: taskId
-	}, function(err, task) {
+
+	Task.model.findOne({_id: taskId})
+		.populate('workingGroup assignedTo createdBy name')
+		.exec(function(err, task) {
 		//Lookup Task and fill up notification email
 		keystone.debug('Writing Email to ' +  user.name + ' ' + user.email);
 		var Email = require('keystone-email');
 
+		// debug email render
+		// new Email(templatePath, {}).render({task:task}, function (err, email){
+		// 	keystone.debug(email);
+		// 	callback();
+		// });
 		new Email(templatePath, {
 				transport: 'mailgun',
 			})
@@ -45,6 +51,7 @@ User.schema.methods.sendEmailNotification = function(taskId, callback) {
 			}, {
 				apiKey: process.env.MAILGUN_API_KEY,
 				domain: process.env.MAILGUN_DOMAIN,
+				'o:tracking': false,
 				to: {
 					name: user.name,
 					email: user.email,
