@@ -23,7 +23,7 @@ Task.add({
   regularEvent: { type: Types.Boolean, label: 'Regular Event' }
 },'Email Notifications',
   { emailNotificaionsOn: { type: Types.Boolean, label: "Enable Email Notifications" },
-    notificationPeriods: { label: "Notifications Period", type: Types.TextArray, dependsOn : {emailNotificaionsOn: true}, default: ["1 Week", "1 Day"]}
+    notificationPeriods: { label: "Notification Periods (before Task Start On Date)", type: Types.TextArray, dependsOn : {emailNotificaionsOn: true}, default: ["1 Week", "1 Day"]}
 });
 Task.defaultColumns = 'title, subtitle, workingGroup, startOn, endOn, createdBy';
 
