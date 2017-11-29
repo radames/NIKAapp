@@ -26,6 +26,6 @@
   },
   "main": "keystone.js",
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "description": ""
 }
