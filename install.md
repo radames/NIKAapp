@@ -1,3 +1,5 @@
+## Install
+
 * mongodb
     https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-16-04
 * node ngnix
@@ -5,3 +7,11 @@
 * tmux
     https://gist.github.com/MohamedAlaa/2961058
 
+### Backup
+
+#### Dump
+
+```mongodump -d DBNAME -o FOLDER```
+
+#### Restore
+```mongorestore COLLECTION_NAME.bson```
