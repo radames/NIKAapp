@@ -47,9 +47,11 @@ keystone.set('locals', {
 keystone.set('routes', require('./routes'));
 
 // Configure the navigation bar in Keystone's Admin UI
-keystone.set('nav', {
-	tasks: 'tasks',
-});
+// keystone.set('nav', {
+// 	tasks: 'tasks',
+// 	decisions: 'decisions',
+// 	decisions: 'decisions',
+// });
 
 // Start Keystone to connect to your database and initialise the web server
 keystone.start(function(){
