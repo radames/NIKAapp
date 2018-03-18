@@ -8,11 +8,11 @@
     "debug": "^3.1.0",
     "dotenv": "^2.0.0",
     "jade": "^1.11.0",
-    "keystone": "^4.0.0-beta.7",
+    "keystone": "git+https://github.com/radames/keystone.git#v4.0.0-beta.8-features",
     "keystone-email": "^1.0.5",
-    "lodash": "^4.17.4",
-    "moment": "^2.19.3",
-    "node-sass": "^4.7.2",
+    "lodash": "^4.17.5",
+    "moment": "^2.21.0",
+    "node-sass": "^4.8.2",
     "node-sass-middleware": "^0.10.1"
   },
   "devDependencies": {
