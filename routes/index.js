@@ -61,6 +61,9 @@ exports = module.exports = function (app) {
 	app.get('/timeline/', middleware.requireUser, routes.views.tasksList);
 	app.get('/timeline/:workingGroup', middleware.requireUser, routes.views.tasksList);
 
+	app.get('/decisions/', middleware.requireUser, routes.views.decisions);
+	app.get('/decisions/:workingGroup', middleware.requireUser, routes.views.decisions);
+
 	app.get('/task-map/', middleware.requireUser, routes.views.graph);
 	app.get('/task-map/:workingGroup', middleware.requireUser, routes.views.graph);
 
