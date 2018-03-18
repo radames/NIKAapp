@@ -30,6 +30,7 @@ keystone.pre('routes', function (req, res, next) {
 		{ label: 'Home', key: 'home', href: '/' },
 		{ label: 'Timeline', key: 'tasks', href: '/timeline' },
 		{ label: 'Task Map', key: 'task-map', href: '/task-map' },
+		{ label: 'Decisions', key: 'decisions', href: '/decisions' },
 		{ label: 'Nextcloud', key: 'nextcloud', href: '/nextcloud' }
 	];
 	res.locals.user = req.user;
