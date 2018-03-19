@@ -21,9 +21,9 @@ Task.add({
   startOn: { type: Types.Datetime, default: Date.now, label: 'Task starts on (HH:MM:SS am/pm)'},
   endOn: { type: Types.Datetime, default: Date.now, label: 'Task ends on (HH:MM:SS am/pm)' },
   regularEvent: { type: Types.Boolean, label: 'Regular Event' }
-},'Email Notifications',
-  { emailNotificaionsOn: { type: Types.Boolean, label: "Enable Email Notifications" },
-    notificationPeriods: { label: "Periods before Starts On", type: Types.TextArray, dependsOn : {emailNotificaionsOn: true}, default: ["1 Week", "1 Day"]}
+},'Email Notifications (Based on Task Start Date)',
+  { emailNotificaionsOn: { type: Types.Boolean, label: "Enable" },
+    notificationPeriods: { label: "Notifications Alert", type: Types.TextArray, dependsOn : {emailNotificaionsOn: true}, default: ["1 Week", "1 Day"]}
 });
 Task.defaultColumns = 'title, subtitle, workingGroup, startOn, endOn, createdBy';
 
