@@ -16,7 +16,7 @@ block content
 			.newTask
 				a(class="btn btn-sm btn-default" type="button" href='/admin/decisions?create')
 					icon(class="glyphicon glyphicon-pencil")
-					| Add Task 
+					| Add Decision 
 			.subtitle
 				if workingGroupFilter
 					h4= workingGroupFilter.name
@@ -47,7 +47,28 @@ block content
 											h4.panel-title
 												a(href="#collapse-" + decision._id, role="button", data-toggle="collapse", data-parent="#accordion", aria-expanded="false", aria-controls="collapse-" + decision._id)
 													!= decision.title
+											a(href='/admin/decisions/' + decision._id, title="Edit Decision")
+												icon(class="glyphicon glyphicon-edit")
+											time(datetime=decision.decisionDate.toISOString())=decision._.decisionDate.format('Do MMMM YYYY')
+
 										.panel-collapse.collapse(role="tabpanel", aria-expanded="false", aria-labelledby="heading-" + decision._id, id="collapse-" + decision._id)
 											.panel-body
-												!= decision.description.html
+												.decision-description
+													!= decision.description.html
+												.panel-footer
+													b Working Group 
+													each wGroup, wGroup_i in decision.workingGroup
+														a(href='/decisions/' + wGroup.key)= wGroup.name
+														if wGroup_i < decision.workingGroup.length - 1
+															| , 
+														else
+															| 
+												.panel-footer
+													.related-tasks
+														b Related Tasks
+														ul.tasks
+															each task, task_id in decision.tasksRelated
+																li= task.title
+
+												
 					
