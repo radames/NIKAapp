@@ -14,7 +14,7 @@ In Frankfurt am Main vacant offices amount to more than two million square metre
 Find NIKA.haus time planning software repository [here.](https://github.com/radames/NIKAapp)
 
 Jeronimo Voss in collaboration with Radamés Ajna, 2017
-- Supported by [The New Observatory](http://www.fact.co.uk/projects/the-new-observatory.aspx) at [FACT Liverpool](http://www.fact.co.uk/)
+- Supported by [The New Observatory](https://archive.fact.co.uk/projects/the-new-observatory.aspx) at [FACT Liverpool](http://www.fact.co.uk/)
 
 ## Video
 
