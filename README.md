@@ -7,7 +7,7 @@ Unlike the emperor dressed in nothing, time is nothing dressed in clothes.
 
 In the beginning of the 1920s, proletarian settlers in Vienna developed their own planned economy of improvised housing. The settlers' building typologies were discussed with lantern slides, projected by architect Margarete Lihotzky.  
                                                                        
-There are libraries of tools to attire time – and turn offices into living space.     
+There are libraries of tools to attire time – and to turn offices into living space.
 
 In Frankfurt am Main vacant offices amount to more than two million square metres of unused urban space - this equals the total amount of living space provided by one of the city’s larger districts. Against this development the project NIKA.haus will prove that the transformation of offices into living space in a solidary and non-commercial syndicate of tenements is a realistic alternative. For further information visit: [www.nika.haus/en](www.nika.haus/en)
     
